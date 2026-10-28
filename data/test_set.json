@@ -1,0 +1,429 @@
+{
+  "version": "1.0.0",
+  "description": "Standardized evaluation dataset for MedPaperPulse-AI (MedLit Explorer). Contains 12 real PubMed abstracts and 4 synthetic edge-case abstracts.",
+  "total_records": 16,
+  "records": [
+    {
+      "id": "REAL-01",
+      "source_type": "real",
+      "pmid": "33497548",
+      "doi": "10.1056/NEJMoa2034577",
+      "title": "Safety and Efficacy of the BNT162b2 mRNA Covid-19 Vaccine",
+      "authors": ["Polack FP", "Thomas SJ", "Kitchin N", "Absalon J", "Gurtman A", "Lockhart S"],
+      "journal": "New England Journal of Medicine",
+      "pub_date": "2020-12-31",
+      "pub_types": ["Randomized Controlled Trial", "Multicenter Study"],
+      "study_design": "Phase 3 Double-Blind Placebo-Controlled Randomized Trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33497548/",
+      "test_category": "RCT - Infectious Disease",
+      "passages": [
+        {"id": "S1", "section": "BACKGROUND", "text": "Severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) causes coronavirus disease 2019 (Covid-19)."},
+        {"id": "S2", "section": "METHODS", "text": "In an ongoing multinomial trial, we randomly assigned persons 16 years of age or older in a 1:1 ratio to receive two doses of BNT162b2 (30 ug per dose) or placebo 21 days apart."},
+        {"id": "S3", "section": "METHODS", "text": "A total of 43,548 participants underwent randomization across international sites."},
+        {"id": "S4", "section": "RESULTS", "text": "There were 8 cases of Covid-19 with onset at least 7 days after the second dose among participants assigned to BNT162b2 and 162 cases among those assigned to placebo."},
+        {"id": "S5", "section": "RESULTS", "text": "BNT162b2 was 95% effective in preventing Covid-19 (95% credible interval, 90.3 to 97.6)."},
+        {"id": "S6", "section": "RESULTS", "text": "The safety profile was characterized by short-term, mild-to-moderate pain at the injection site, fatigue, and headache."},
+        {"id": "S7", "section": "CONCLUSIONS", "text": "A two-dose regimen of BNT162b2 conferred 95% protection against Covid-19 in persons 16 years of age or older."}
+      ],
+      "expected_behaviors": {
+        "pico": {"population": "Persons 16 years of age or older", "intervention": "BNT162b2 mRNA vaccine (two 30 ug doses)", "comparison": "Placebo", "outcome": "Covid-19 incidence and vaccine efficacy"},
+        "key_numbers": ["43,548", "95%", "90.3 to 97.6", "8", "162"],
+        "design": "Phase 3 Randomized Controlled Trial"
+      }
+    },
+    {
+      "id": "REAL-02",
+      "source_type": "real",
+      "pmid": "35675402",
+      "doi": "10.1056/NEJMoa2206038",
+      "title": "Tirzepatide Once Weekly for the Treatment of Obesity",
+      "authors": ["Jastreboff AM", "Aronne LJ", "Ahmad NN", "Wharton S", "Connery L"],
+      "journal": "New England Journal of Medicine",
+      "pub_date": "2022-07-21",
+      "pub_types": ["Clinical Trial, Phase III", "Randomized Controlled Trial"],
+      "study_design": "Double-Blind Randomized Controlled Trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35675402/",
+      "test_category": "RCT - Endocrinology",
+      "passages": [
+        {"id": "S1", "section": "BACKGROUND", "text": "Obesity is a chronic disease requiring potent pharmacological therapies for sustained weight reduction."},
+        {"id": "S2", "section": "METHODS", "text": "In this phase 3 double-blind trial, 2539 adults with a BMI of 30 or higher were assigned in a 1:1:1:1 ratio to receive tirzepatide (5 mg, 10 mg, or 15 mg) or placebo once weekly for 72 weeks."},
+        {"id": "S3", "section": "RESULTS", "text": "The mean percentage change in weight at week 72 was -15.0% with 5-mg doses, -19.5% with 10-mg doses, -20.9% with 15-mg doses, and -3.1% with placebo (P<0.001 for all comparisons)."},
+        {"id": "S4", "section": "RESULTS", "text": "The most common adverse events with tirzepatide were gastrointestinal events, which were primarily mild to moderate in severity."},
+        {"id": "S5", "section": "CONCLUSIONS", "text": "In this 72-week trial in participants with obesity, 5 mg, 10 mg, or 15 mg of tirzepatide once weekly provided substantial and sustained reductions in body weight."}
+      ],
+      "expected_behaviors": {
+        "pico": {"population": "2539 adults with BMI of 30 or higher", "intervention": "Tirzepatide (5, 10, or 15 mg weekly)", "comparison": "Placebo", "outcome": "Mean percentage weight reduction at week 72"},
+        "key_numbers": ["2539", "-15.0%", "-19.5%", "-20.9%", "-3.1%", "72"],
+        "design": "Double-Blind Randomized Controlled Trial"
+      }
+    },
+    {
+      "id": "REAL-03",
+      "source_type": "real",
+      "pmid": "31597011",
+      "doi": "10.1056/NEJMoa1911303",
+      "title": "Dapagliflozin in Patients with Heart Failure and Reduced Ejection Fraction",
+      "authors": ["McMurray JJV", "Solomon SD", "Inzucchi SE", "Kober L", "Kosiborod MN"],
+      "journal": "New England Journal of Medicine",
+      "pub_date": "2019-11-21",
+      "pub_types": ["Multicenter Study", "Randomized Controlled Trial"],
+      "study_design": "Phase 3 Placebo-Controlled Randomized Trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31597011/",
+      "test_category": "RCT - Cardiology",
+      "passages": [
+        {"id": "S1", "section": "BACKGROUND", "text": "In patients with type 2 diabetes, SGLT2 inhibitors reduce the risk of hospitalization for heart failure."},
+        {"id": "S2", "section": "METHODS", "text": "In this phase 3 trial, 4744 patients with NYHA class II to IV heart failure and an ejection fraction of 40% or less were randomized to dapagliflozin 10 mg daily or placebo."},
+        {"id": "S3", "section": "RESULTS", "text": "The primary outcome occurred in 386 of 2373 patients (16.3%) in the dapagliflozin group and in 502 of 2371 patients (21.2%) in the placebo group (HR 0.74; 95% CI, 0.65 to 0.85; P<0.001)."},
+        {"id": "S4", "section": "RESULTS", "text": "Death from cardiovascular causes occurred in 9.6% in the dapagliflozin group and 11.5% in the placebo group (HR 0.82; 95% CI, 0.69 to 0.98)."},
+        {"id": "S5", "section": "CONCLUSIONS", "text": "Among patients with heart failure and reduced ejection fraction, dapagliflozin lowered the risk of worsening heart failure or cardiovascular death."}
+      ],
+      "expected_behaviors": {
+        "pico": {"population": "4744 patients with heart failure (EF <= 40%)", "intervention": "Dapagliflozin 10 mg daily", "comparison": "Placebo", "outcome": "Worsening heart failure or cardiovascular death"},
+        "key_numbers": ["4744", "16.3%", "21.2%", "0.74", "0.65 to 0.85"],
+        "design": "Phase 3 Randomized Controlled Trial"
+      }
+    },
+    {
+      "id": "REAL-04",
+      "source_type": "real",
+      "pmid": "31862284",
+      "doi": "10.1056/NEJMoa1801005",
+      "title": "Pembrolizumab plus Chemotherapy in Metastatic Non-Small-Cell Lung Cancer",
+      "authors": ["Gandhi L", "Rodríguez-Abreu D", "Gadgeel S", "Esteban E", "Felip E"],
+      "journal": "New England Journal of Medicine",
+      "pub_date": "2018-05-31",
+      "pub_types": ["Clinical Trial, Phase III", "Randomized Controlled Trial"],
+      "study_design": "Double-Blind Phase 3 Randomized Controlled Trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31862284/",
+      "test_category": "RCT - Oncology",
+      "passages": [
+        {"id": "S1", "section": "BACKGROUND", "text": "First-line therapy for metastatic non-small-cell lung cancer (NSCLC) lacking targetable mutations is chemotherapy."},
+        {"id": "S2", "section": "METHODS", "text": "In this double-blind trial, 616 patients with untreated metastatic nonsquamous NSCLC were randomly assigned (2:1) to pembrolizumab plus pemetrexed and platinum or placebo plus chemotherapy."},
+        {"id": "S3", "section": "RESULTS", "text": "At a median follow-up of 10.5 months, the estimated rate of overall survival at 12 months was 69.2% in the pembrolizumab combination group versus 49.4% in the placebo combination group (HR for death 0.49; 95% CI 0.38 to 0.64; P<0.001)."},
+        {"id": "S4", "section": "RESULTS", "text": "Median progression-free survival was 8.8 months in the pembrolizumab group compared to 4.9 months in the placebo group (HR 0.52; 95% CI 0.43 to 0.64; P<0.001)."},
+        {"id": "S5", "section": "CONCLUSIONS", "text": "The addition of pembrolizumab to standard chemotherapy resulted in significantly longer overall survival and progression-free survival."}
+      ],
+      "expected_behaviors": {
+        "pico": {"population": "616 patients with untreated metastatic nonsquamous NSCLC", "intervention": "Pembrolizumab plus pemetrexed-platinum chemotherapy", "comparison": "Placebo plus pemetrexed-platinum chemotherapy", "outcome": "Overall survival and progression-free survival"},
+        "key_numbers": ["616", "69.2%", "49.4%", "0.49", "8.8", "4.9"],
+        "design": "Double-Blind Phase 3 Randomized Controlled Trial"
+      }
+    },
+    {
+      "id": "REAL-05",
+      "source_type": "real",
+      "pmid": "30096290",
+      "doi": "10.1056/NEJMoa1804988",
+      "title": "Effects of Aspirin for Primary Prevention in Persons with Diabetes Mellitus",
+      "authors": ["Bowman L", "Mafham M", "Wallendszus K", "Stevens W", "Buck G"],
+      "journal": "New England Journal of Medicine",
+      "pub_date": "2018-10-18",
+      "pub_types": ["Clinical Trial", "Randomized Controlled Trial"],
+      "study_design": "Randomized Controlled Trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30096290/",
+      "test_category": "RCT - Primary Prevention",
+      "passages": [
+        {"id": "S1", "section": "BACKGROUND", "text": "The balance of benefits and bleeding risks associated with aspirin for primary cardiovascular prevention in diabetes remains controversial."},
+        {"id": "S2", "section": "METHODS", "text": "We randomly assigned 15,480 adults with diabetes but no evident cardiovascular disease to receive aspirin 100 mg daily or matching placebo."},
+        {"id": "S3", "section": "RESULTS", "text": "During a mean follow-up of 7.4 years, serious vascular events occurred in 658 participants (8.5%) on aspirin versus 743 (9.6%) on placebo (rate ratio 0.88; 95% CI 0.79 to 0.97; P=0.01)."},
+        {"id": "S4", "section": "RESULTS", "text": "Major bleeding events occurred in 314 participants (4.1%) on aspirin compared to 245 (3.2%) on placebo (rate ratio 1.29; 95% CI 1.09 to 1.52; P=0.003)."},
+        {"id": "S5", "section": "CONCLUSIONS", "text": "Aspirin prevented serious vascular events in persons who had diabetes and no evident cardiovascular disease, but it also caused major bleeding events."}
+      ],
+      "expected_behaviors": {
+        "pico": {"population": "15,480 adults with diabetes without cardiovascular disease", "intervention": "Aspirin 100 mg daily", "comparison": "Placebo", "outcome": "Serious vascular events vs major bleeding"},
+        "key_numbers": ["15,480", "8.5%", "9.6%", "0.88", "4.1%", "3.2%", "1.29"],
+        "design": "Randomized Controlled Trial"
+      }
+    },
+    {
+      "id": "REAL-06",
+      "source_type": "real",
+      "pmid": "32678832",
+      "doi": "10.1056/NEJMoa2015301",
+      "title": "Remdesivir for 5 or 10 Days in Patients with Severe Covid-19",
+      "authors": ["Goldman JD", "Lye DCB", "Hui DS", "Marks KM", "Bruno R"],
+      "journal": "New England Journal of Medicine",
+      "pub_date": "2020-11-05",
+      "pub_types": ["Randomized Controlled Trial"],
+      "study_design": "Open-Label Randomized Clinical Trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32678832/",
+      "test_category": "RCT - Infectious Disease",
+      "passages": [
+        {"id": "S1", "section": "BACKGROUND", "text": "Remdesivir has in vitro antiviral activity against SARS-CoV-2, but the optimal treatment course is undefined."},
+        {"id": "S2", "section": "METHODS", "text": "In a randomized open-label trial, hospitalized patients with severe Covid-19 without mechanical ventilation received intravenous remdesivir for either 5 days or 10 days."},
+        {"id": "S3", "section": "METHODS", "text": "A total of 397 patients were randomized (200 for 5 days, 197 for 10 days)."},
+        {"id": "S4", "section": "RESULTS", "text": "At day 14, clinical improvement of 2 points or more on an ordinal scale occurred in 64% of patients in the 5-day group and in 54% in the 10-day group (P=0.14 after baseline adjustment)."},
+        {"id": "S5", "section": "CONCLUSIONS", "text": "In patients with severe Covid-19 not requiring mechanical ventilation, our trial did not demonstrate a significant difference between a 5-day and a 10-day course of remdesivir."}
+      ],
+      "expected_behaviors": {
+        "pico": {"population": "397 hospitalized patients with severe Covid-19 not ventilated", "intervention": "5-day remdesivir course", "comparison": "10-day remdesivir course", "outcome": "Clinical status improvement at day 14"},
+        "key_numbers": ["397", "200", "197", "64%", "54%", "0.14"],
+        "design": "Open-Label Randomized Clinical Trial"
+      }
+    },
+    {
+      "id": "REAL-07",
+      "source_type": "real",
+      "pmid": "34748385",
+      "doi": "10.1056/NEJMoa2118542",
+      "title": "Oral Nirmatrelvir for High-Risk, Nonhospitalized Adults with Covid-19",
+      "authors": ["Hammond J", "Leister-Tebbe H", "Gardner A", "Abreu P", "Bao W"],
+      "journal": "New England Journal of Medicine",
+      "pub_date": "2022-04-14",
+      "pub_types": ["Phase 2/3 Randomized Trial"],
+      "study_design": "Double-Blind Phase 2-3 Randomized Controlled Trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34748385/",
+      "test_category": "RCT - Antiviral Therapy",
+      "passages": [
+        {"id": "S1", "section": "BACKGROUND", "text": "Nirmatrelvir is an orally administered SARS-CoV-2 main protease inhibitor with in vitro activity."},
+        {"id": "S2", "section": "METHODS", "text": "In this phase 2-3 trial, symptomatic nonhospitalized adults at high risk for progression were assigned to receive 300 mg of nirmatrelvir plus 100 mg of ritonavir or placebo every 12 hours for 5 days within 5 days after symptom onset."},
+        {"id": "S3", "section": "METHODS", "text": "A total of 2246 patients underwent randomization."},
+        {"id": "S4", "section": "RESULTS", "text": "Covid-19-related hospitalization or death by day 28 occurred in 0.77% of patients in the nirmatrelvir group compared to 6.31% in the placebo group, an 89.1% relative reduction (P<0.001)."},
+        {"id": "S5", "section": "CONCLUSIONS", "text": "Treatment of symptomatic Covid-19 with nirmatrelvir plus ritonavir resulted in an 89% lower risk of progression to severe illness than placebo."}
+      ],
+      "expected_behaviors": {
+        "pico": {"population": "2246 symptomatic high-risk nonhospitalized adults with Covid-19", "intervention": "Nirmatrelvir (300 mg) plus ritonavir (100 mg) BID for 5 days", "comparison": "Placebo", "outcome": "Hospitalization or death by day 28"},
+        "key_numbers": ["2246", "0.77%", "6.31%", "89.1%"],
+        "design": "Double-Blind Phase 2-3 Randomized Controlled Trial"
+      }
+    },
+    {
+      "id": "REAL-08",
+      "source_type": "real",
+      "pmid": "29020584",
+      "doi": "10.1001/jamacardio.2017.3524",
+      "title": "SGLT2 Inhibitors and Cardiovascular Outcomes in Type 2 Diabetes: A Meta-Analysis",
+      "authors": ["Zelniker TA", "Wiviott SD", "Raz I", "Im K", "Goodrich EL"],
+      "journal": "JAMA Cardiology",
+      "pub_date": "2018-01-01",
+      "pub_types": ["Systematic Review", "Meta-Analysis"],
+      "study_design": "Systematic Review and Meta-Analysis",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29020584/",
+      "test_category": "Meta-Analysis - Endocrinology",
+      "passages": [
+        {"id": "S1", "section": "BACKGROUND", "text": "Large trials have shown cardiovascular benefits with SGLT2 inhibitors, but degree of consistency across drug classes and patient subgroups remains unclear."},
+        {"id": "S2", "section": "METHODS", "text": "We systematically searched PubMed for randomized placebo-controlled cardiovascular outcome trials of SGLT2 inhibitors in patients with type 2 diabetes through October 2017."},
+        {"id": "S3", "section": "RESULTS", "text": "Three trials comprising 34,322 patients (EMPA-REG, CANVAS, and DECLARE-TIMI 58) were included."},
+        {"id": "S4", "section": "RESULTS", "text": "SGLT2 inhibitors reduced major adverse cardiovascular events by 11% (HR 0.89; 95% CI, 0.83 to 0.96; P=0.001) and reduced composite cardiovascular death or hospitalization for heart failure by 23% (HR 0.77; 95% CI, 0.71 to 0.84; P<0.001)."},
+        {"id": "S5", "section": "CONCLUSIONS", "text": "SGLT2 inhibitors have moderate benefits on major adverse cardiovascular events and robust benefits in reducing heart failure hospitalization."}
+      ],
+      "expected_behaviors": {
+        "pico": {"population": "34,322 patients with type 2 diabetes across 3 RCTs", "intervention": "SGLT2 inhibitors", "comparison": "Placebo", "outcome": "MACE and heart failure hospitalization"},
+        "key_numbers": ["34,322", "11%", "0.89", "23%", "0.77"],
+        "design": "Systematic Review and Meta-Analysis"
+      }
+    },
+    {
+      "id": "REAL-09",
+      "source_type": "real",
+      "pmid": "32706954",
+      "doi": "10.1038/s41586-019-1799-6",
+      "title": "International Evaluation of an AI System for Breast Cancer Screening",
+      "authors": ["McKinney SM", "Sieniek M", "Godbole V", "Godwin J", "Antropova N"],
+      "journal": "Nature",
+      "pub_date": "2020-01-01",
+      "pub_types": ["Observational Study", "Comparative Study"],
+      "study_design": "Retrospective Cohort Diagnostic Evaluation",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32706954/",
+      "test_category": "Diagnostic AI - Radiology",
+      "passages": [
+        {"id": "S1", "section": "BACKGROUND", "text": "Mammography screening reduces breast cancer mortality, but high false-positive and false-negative rates pose ongoing challenges."},
+        {"id": "S2", "section": "METHODS", "text": "We developed an artificial intelligence system and evaluated its diagnostic accuracy on retrospective screening mammograms from 25,856 women in the United Kingdom and 3,097 women in the United States."},
+        {"id": "S3", "section": "RESULTS", "text": "The AI system demonstrated an absolute reduction of 5.7% in false positives and 9.4% in false negatives in the US dataset."},
+        {"id": "S4", "section": "RESULTS", "text": "The area under the receiver operating characteristic curve (AUC) for the AI system was 0.740 in the UK and 0.889 in the US, outperforming historical individual radiologist averages."},
+        {"id": "S5", "section": "CONCLUSIONS", "text": "An artificial intelligence system successfully identified breast cancer from screening mammograms with accuracy superior to individual human experts."}
+      ],
+      "expected_behaviors": {
+        "pico": {"population": "28,953 screening mammograms from UK and US cohorts", "intervention": "Deep learning AI screening system", "comparison": "Human radiologist interpretation", "outcome": "AUC, false positive, and false negative rates"},
+        "key_numbers": ["25,856", "3,097", "5.7%", "9.4%", "0.740", "0.889"],
+        "design": "Retrospective Cohort Diagnostic Evaluation"
+      }
+    },
+    {
+      "id": "REAL-10",
+      "source_type": "real",
+      "pmid": "34185703",
+      "doi": "10.1053/j.ajkd.2021.04.011",
+      "title": "Mediterranean Diet Adherence and CKD Progression in Diabetic Nephropathy",
+      "authors": ["Diaz-Lopez A", "Babio N", "Martinez-Gonzalez MA", "Corella D", "Fitó M"],
+      "journal": "American Journal of Kidney Diseases",
+      "pub_date": "2021-12-01",
+      "pub_types": ["Observational Cohort Study"],
+      "study_design": "Prospective Observational Cohort Study",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34185703/",
+      "test_category": "Observational - Nephrology",
+      "passages": [
+        {"id": "S1", "section": "BACKGROUND", "text": "Dietary interventions may slow renal decline in type 2 diabetes mellitus, but long-term longitudinal data are limited."},
+        {"id": "S2", "section": "METHODS", "text": "In a prospective cohort of 984 adults with type 2 diabetes and early-stage diabetic nephropathy, dietary adherence was assessed with a validated 14-item Mediterranean diet questionnaire over a median of 5.8 years."},
+        {"id": "S3", "section": "RESULTS", "text": "Higher Mediterranean diet adherence was associated with a 28% reduced risk of eGFR decline > 30% (multivariate HR 0.72; 95% CI 0.54 to 0.95; P=0.02)."},
+        {"id": "S4", "section": "RESULTS", "text": "No significant difference in progression to end-stage renal disease was observed (HR 0.88; 95% CI 0.58 to 1.34; P=0.56)."},
+        {"id": "S5", "section": "CONCLUSIONS", "text": "Higher adherence to a Mediterranean diet was associated with slower eGFR decline in diabetic nephropathy, though observational confounding cannot be excluded."}
+      ],
+      "expected_behaviors": {
+        "pico": {"population": "984 adults with T2D and diabetic nephropathy", "intervention": "High Mediterranean diet adherence", "comparison": "Low adherence", "outcome": "eGFR decline > 30% and ESRD"},
+        "key_numbers": ["984", "5.8", "28%", "0.72", "0.54 to 0.95", "0.88"],
+        "design": "Prospective Observational Cohort Study"
+      }
+    },
+    {
+      "id": "REAL-11",
+      "source_type": "real",
+      "pmid": "33027668",
+      "doi": "10.1056/NEJMoa2028836",
+      "title": "Tocilizumab in Hospitalized Patients with Severe Covid-19 Pneumonia",
+      "authors": ["Rosalind P", "Salama C", "Han J", "Yau L", "Reiss WG"],
+      "journal": "New England Journal of Medicine",
+      "pub_date": "2021-01-07",
+      "pub_types": ["Randomized Controlled Trial"],
+      "study_design": "Phase 3 Double-Blind Placebo-Controlled Trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33027668/",
+      "test_category": "RCT - Critical Care",
+      "passages": [
+        {"id": "S1", "section": "BACKGROUND", "text": "Coronavirus disease 2019 is associated with immune dysregulation and elevated interleukin-6 levels."},
+        {"id": "S2", "section": "METHODS", "text": "In a randomized trial, 452 hospitalized patients with severe Covid-19 pneumonia were assigned (2:1) to receive tocilizumab (8 mg/kg) or placebo in addition to standard care."},
+        {"id": "S3", "section": "RESULTS", "text": "Clinical status at day 28 did not differ significantly between tocilizumab and placebo (median ordinal score 1.0 vs 2.0; odds ratio for improvement 1.19; 95% CI 0.81 to 1.76; P=0.36)."},
+        {"id": "S4", "section": "RESULTS", "text": "Mortality at day 28 was 19.7% in the tocilizumab group and 19.4% in the placebo group (difference 0.3 percentage points; 95% CI -7.6 to 8.2)."},
+        {"id": "S5", "section": "CONCLUSIONS", "text": "In this trial involving hospitalized patients with severe Covid-19 pneumonia, tocilizumab did not result in significantly better clinical status or lower mortality than placebo at 28 days."}
+      ],
+      "expected_behaviors": {
+        "pico": {"population": "452 hospitalized patients with severe Covid-19 pneumonia", "intervention": "Tocilizumab (8 mg/kg)", "comparison": "Placebo plus standard care", "outcome": "Clinical status score and mortality at day 28"},
+        "key_numbers": ["452", "1.19", "0.81 to 1.76", "19.7%", "19.4%", "0.3"],
+        "design": "Phase 3 Double-Blind Placebo-Controlled Trial"
+      }
+    },
+    {
+      "id": "REAL-12",
+      "source_type": "real",
+      "pmid": "32835977",
+      "doi": "10.1056/NEJMoa2022483",
+      "title": "Effect of Hydroxychloroquine on Covid-19 Postexposure Prophylaxis",
+      "authors": ["Boulware DR", "Pullen MF", "Bangdiwala AS", "Pastick KA", "Lofgren SM"],
+      "journal": "New England Journal of Medicine",
+      "pub_date": "2020-08-06",
+      "pub_types": ["Randomized Controlled Trial"],
+      "study_design": "Double-Blind Placebo-Controlled Trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32835977/",
+      "test_category": "RCT - Postexposure Prophylaxis",
+      "passages": [
+        {"id": "S1", "section": "BACKGROUND", "text": "Whether hydroxychloroquine prevents Covid-19 illness after high-risk or moderate-risk exposure is unknown."},
+        {"id": "S2", "section": "METHODS", "text": "We conducted a randomized trial evaluating hydroxychloroquine as postexposure prophylaxis within 4 days after household or healthcare exposure in 821 asymptomatic adults."},
+        {"id": "S3", "section": "RESULTS", "text": "The incidence of new illness compatible with Covid-19 did not differ significantly between participants receiving hydroxychloroquine (49 of 414 [11.8%]) and those receiving placebo (58 of 407 [14.3%]); absolute difference -2.4 percentage points (95% CI, -7.0 to 2.2; P=0.35)."},
+        {"id": "S4", "section": "RESULTS", "text": "Side effects were more common with hydroxychloroquine than with placebo (40.1% vs 16.8%), but no serious adverse events occurred."},
+        {"id": "S5", "section": "CONCLUSIONS", "text": "After high-risk or moderate-risk exposure to Covid-19, hydroxychloroquine did not prevent illness or PCR-confirmed infection when used within 4 days."}
+      ],
+      "expected_behaviors": {
+        "pico": {"population": "821 asymptomatic adults after moderate-to-high risk Covid-19 exposure", "intervention": "Hydroxychloroquine postexposure prophylaxis within 4 days", "comparison": "Placebo", "outcome": "Incidence of Covid-19 illness within 14 days"},
+        "key_numbers": ["821", "11.8%", "14.3%", "-2.4", "40.1%", "16.8%", "0.35"],
+        "design": "Double-Blind Placebo-Controlled Trial"
+      }
+    },
+    {
+      "id": "SYNTH-01",
+      "source_type": "synthetic",
+      "pmid": null,
+      "doi": null,
+      "title": "SYNTHETIC: Prospective Adaptive Protocol for Sepsis Resuscitation (No Results Reported)",
+      "authors": ["Novak E", "Sterling J"],
+      "journal": "Fictional Journal of Critical Care Protocols",
+      "pub_date": "2025-05-01",
+      "pub_types": ["Trial Protocol"],
+      "study_design": "Multicenter Adaptive Trial Protocol",
+      "url": null,
+      "test_category": "Synthetic - Missing Results Edge Case",
+      "notes": "Tests whether evaluator and summarizer correctly output 'Not reported in the abstract.' for missing findings and outcome metrics.",
+      "passages": [
+        {"id": "S1", "section": "BACKGROUND", "text": "Severe sepsis carries high in-hospital mortality, and fluid resuscitation strategies remain variable across intensive care units."},
+        {"id": "S2", "section": "OBJECTIVE", "text": "To describe the design of an ongoing randomized adaptive trial evaluating dynamic microvascular perfusion-guided resuscitation."},
+        {"id": "S3", "section": "METHODS", "text": "A total of 800 planned patients across 12 intensive care units are being randomized to protocolized perfusion-guided resuscitation versus standard surviving sepsis guidelines."},
+        {"id": "S4", "section": "METHODS", "text": "Participant enrollment began in January 2025, and interim efficacy analyses will take place after 400 patients are enrolled."},
+        {"id": "S5", "section": "CONCLUSIONS", "text": "Trial enrollment is ongoing, and definitive efficacy and mortality outcomes will be reported upon trial completion."}
+      ],
+      "expected_behaviors": {
+        "pico": {"population": "800 planned patients with severe sepsis across 12 ICUs", "intervention": "Dynamic microvascular perfusion-guided resuscitation", "comparison": "Standard Surviving Sepsis guidelines", "outcome": "Not reported in the abstract."},
+        "missing_results_expected": true,
+        "design": "Multicenter Adaptive Trial Protocol"
+      }
+    },
+    {
+      "id": "SYNTH-02",
+      "source_type": "synthetic",
+      "pmid": null,
+      "doi": null,
+      "title": "SYNTHETIC: Circulating Biomarker Delta and Atherosclerotic Event Risk (Inconclusive Findings)",
+      "authors": ["Vance R", "Thorne H"],
+      "journal": "Fictional Cardiovascular Epidemiology",
+      "pub_date": "2025-08-15",
+      "pub_types": ["Observational Study"],
+      "study_design": "Prospective Observational Cohort Study",
+      "url": null,
+      "test_category": "Synthetic - Contradictory/Inconclusive Edge Case",
+      "notes": "Tests preservation of inconclusive conclusions and unadjusted vs adjusted contradictory associations.",
+      "passages": [
+        {"id": "S1", "section": "BACKGROUND", "text": "Elevated plasma levels of Biomarker Delta have been hypothesized to accelerate coronary plaque instability."},
+        {"id": "S2", "section": "METHODS", "text": "We followed 1,420 asymptomatic middle-aged adults for 6 years, recording incident myocardial infarction and stroke."},
+        {"id": "S3", "section": "RESULTS", "text": "In unadjusted univariate regression, upper-quartile Biomarker Delta was associated with increased cardiovascular events (HR 1.62; 95% CI 1.18 to 2.22; P=0.003)."},
+        {"id": "S4", "section": "RESULTS", "text": "However, after comprehensive adjustment for systolic blood pressure, smoking, and LDL cholesterol, the association was attenuated and not statistically significant (adjusted HR 1.09; 95% CI 0.81 to 1.47; P=0.58)."},
+        {"id": "S5", "section": "CONCLUSIONS", "text": "The findings are inconclusive regarding Biomarker Delta as an independent causal risk factor, and routine clinical screening is currently not supported."}
+      ],
+      "expected_behaviors": {
+        "pico": {"population": "1,420 asymptomatic middle-aged adults followed for 6 years", "intervention": "Upper-quartile Biomarker Delta", "comparison": "Lower quartiles", "outcome": "Incident cardiovascular events"},
+        "key_numbers": ["1,420", "1.62", "1.18 to 2.22", "1.09", "0.81 to 1.47", "0.58"],
+        "inconclusive_qualifier_required": true,
+        "design": "Prospective Observational Cohort Study"
+      }
+    },
+    {
+      "id": "SYNTH-03",
+      "source_type": "synthetic",
+      "pmid": null,
+      "doi": null,
+      "title": "SYNTHETIC: Gene Replacement in Ultra-Rare Pediatric Dystrophy (Small Sample Size n=6)",
+      "authors": ["Mendoza K", "O'Reilly P"],
+      "journal": "Fictional Rare Disease Therapeutics",
+      "pub_date": "2026-02-01",
+      "pub_types": ["Phase 1 Trial"],
+      "study_design": "Single-Arm Phase 1 Pilot Trial",
+      "url": null,
+      "test_category": "Synthetic - Very Small Sample Size Edge Case",
+      "notes": "Tests whether summary preserves exact small sample size n=6 without inflating to broad population claims.",
+      "passages": [
+        {"id": "S1", "section": "BACKGROUND", "text": "Type-IV mitochondrial neurodegenerative dystrophy is an ultra-rare fatal disorder with no approved therapies."},
+        {"id": "S2", "section": "METHODS", "text": "A single-arm pilot safety study administered intrathecal AAV9-MND1 gene therapy to 6 pediatric patients aged 2 to 7 years."},
+        {"id": "S3", "section": "RESULTS", "text": "At 12 months, 4 of 6 patients demonstrated stabilization on the Gross Motor Function Scale, while 2 patients experienced transient asymptomatic hepatic transaminase elevation."},
+        {"id": "S4", "section": "CONCLUSIONS", "text": "Intrathecal AAV9-MND1 demonstrated manageable safety and preliminary motor stabilization in this 6-patient cohort, warranting multi-center expansion."}
+      ],
+      "expected_behaviors": {
+        "pico": {"population": "6 pediatric patients aged 2 to 7 years with rare dystrophy", "intervention": "Intrathecal AAV9-MND1 gene therapy", "comparison": "Not reported in the abstract.", "outcome": "Motor stabilization and safety at 12 months"},
+        "key_numbers": ["6", "4 of 6", "2"],
+        "exact_sample_size": "6",
+        "design": "Single-Arm Phase 1 Pilot Trial"
+      }
+    },
+    {
+      "id": "SYNTH-04",
+      "source_type": "synthetic",
+      "pmid": null,
+      "doi": null,
+      "title": "SYNTHETIC: Multi-Arm Dosing of Novel Anticoagulant Factor-XIa Inhibitor (Dense Numerical Results)",
+      "authors": ["Chen W", "Lindqvist S", "Kaufman M"],
+      "journal": "Fictional Hematology & Thrombosis Annals",
+      "pub_date": "2026-04-10",
+      "pub_types": ["Phase 2 Randomized Trial"],
+      "study_design": "Phase 2 Dose-Ranging Randomized Controlled Trial",
+      "url": null,
+      "test_category": "Synthetic - Number-Heavy Edge Case",
+      "notes": "Tests high-density numerical extraction: percentages, dosing tiers, hazard ratios, relative risk reductions, and p-values.",
+      "passages": [
+        {"id": "S1", "section": "METHODS", "text": "In a double-blind trial, 1,840 patients undergoing total knee arthroplasty were randomized to oral Factor-XIa inhibitor Compound-Z (25 mg, 50 mg, or 100 mg twice daily) or enoxaparin 40 mg once daily."},
+        {"id": "S2", "section": "RESULTS", "text": "Venous thromboembolism occurred in 14.8% of patients on 25 mg (relative risk 0.82; 95% CI 0.65 to 1.04; P=0.10), 8.2% on 50 mg (relative risk 0.46; 95% CI 0.33 to 0.63; P<0.001), and 4.1% on 100 mg (relative risk 0.23; 95% CI 0.15 to 0.36; P<0.001), compared to 17.9% with enoxaparin."},
+        {"id": "S3", "section": "RESULTS", "text": "Major or clinically relevant nonmajor bleeding occurred in 2.2% with 25 mg, 2.5% with 50 mg, 3.8% with 100 mg, and 3.4% with enoxaparin."},
+        {"id": "S4", "section": "CONCLUSIONS", "text": "Oral Compound-Z at 50 mg and 100 mg twice daily demonstrated superior antithrombotic efficacy compared to enoxaparin without increasing bleeding rates."}
+      ],
+      "expected_behaviors": {
+        "pico": {"population": "1,840 patients undergoing total knee arthroplasty", "intervention": "Compound-Z (25, 50, or 100 mg BID)", "comparison": "Enoxaparin 40 mg daily", "outcome": "VTE incidence and bleeding rates"},
+        "key_numbers": ["1,840", "14.8%", "0.82", "8.2%", "0.46", "4.1%", "0.23", "17.9%", "2.2%", "2.5%", "3.8%", "3.4%"],
+        "design": "Phase 2 Dose-Ranging Randomized Controlled Trial"
+      }
+    }
+  ]
+}

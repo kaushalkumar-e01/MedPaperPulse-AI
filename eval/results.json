@@ -1,0 +1,484 @@
+{
+  "dataset_path": "data\\test_set.json",
+  "total_test_cases": 16,
+  "successful_cases": 16,
+  "evaluation_mode": "mock",
+  "aggregate_metrics": {
+    "numeric_faithfulness": {
+      "rate_percentage": 100.0,
+      "supported_claims": 47,
+      "total_numeric_claims": 47,
+      "target_percentage": 95.0,
+      "meets_target": true
+    },
+    "citation_resolution": {
+      "rate_percentage": 100.0,
+      "resolvable_claims": 79,
+      "total_claims": 79,
+      "target_percentage": 95.0,
+      "meets_target": true
+    },
+    "required_field_presence": {
+      "rate_percentage": 100.0,
+      "present_fields": 144,
+      "total_fields": 144,
+      "target_percentage": 90.0,
+      "meets_target": true
+    },
+    "llm_judge_score": {
+      "average_score": null,
+      "target_score": 4.0,
+      "evaluated_count": 0
+    }
+  },
+  "per_case_results": [
+    {
+      "paper_id": "33497548",
+      "title": "Safety and Efficacy of the BNT162b2 mRNA Covid-19 Vaccine",
+      "numeric_faithfulness": {
+        "total_numeric_claims": 4,
+        "supported_claims": 4,
+        "unsupported_claims": 0,
+        "faithfulness_rate": 100.0,
+        "unsupported_details": [],
+        "requires_manual_review": false
+      },
+      "citation_resolution": {
+        "total_claims": 5,
+        "resolvable_claims": 5,
+        "unresolvable_claims": 0,
+        "citation_resolution_rate": 100.0,
+        "unresolved_details": []
+      },
+      "required_fields": {
+        "total_fields": 9,
+        "present_fields": 9,
+        "missing_fields": [],
+        "field_presence_rate": 100.0
+      },
+      "case_id": "REAL-01",
+      "source_type": "real",
+      "test_category": "RCT - Infectious Disease"
+    },
+    {
+      "paper_id": "35675402",
+      "title": "Tirzepatide Once Weekly for the Treatment of Obesity",
+      "numeric_faithfulness": {
+        "total_numeric_claims": 4,
+        "supported_claims": 4,
+        "unsupported_claims": 0,
+        "faithfulness_rate": 100.0,
+        "unsupported_details": [],
+        "requires_manual_review": false
+      },
+      "citation_resolution": {
+        "total_claims": 5,
+        "resolvable_claims": 5,
+        "unresolvable_claims": 0,
+        "citation_resolution_rate": 100.0,
+        "unresolved_details": []
+      },
+      "required_fields": {
+        "total_fields": 9,
+        "present_fields": 9,
+        "missing_fields": [],
+        "field_presence_rate": 100.0
+      },
+      "case_id": "REAL-02",
+      "source_type": "real",
+      "test_category": "RCT - Endocrinology"
+    },
+    {
+      "paper_id": "31597011",
+      "title": "Dapagliflozin in Patients with Heart Failure and Reduced Ejection Fraction",
+      "numeric_faithfulness": {
+        "total_numeric_claims": 3,
+        "supported_claims": 3,
+        "unsupported_claims": 0,
+        "faithfulness_rate": 100.0,
+        "unsupported_details": [],
+        "requires_manual_review": false
+      },
+      "citation_resolution": {
+        "total_claims": 5,
+        "resolvable_claims": 5,
+        "unresolvable_claims": 0,
+        "citation_resolution_rate": 100.0,
+        "unresolved_details": []
+      },
+      "required_fields": {
+        "total_fields": 9,
+        "present_fields": 9,
+        "missing_fields": [],
+        "field_presence_rate": 100.0
+      },
+      "case_id": "REAL-03",
+      "source_type": "real",
+      "test_category": "RCT - Cardiology"
+    },
+    {
+      "paper_id": "31862284",
+      "title": "Pembrolizumab plus Chemotherapy in Metastatic Non-Small-Cell Lung Cancer",
+      "numeric_faithfulness": {
+        "total_numeric_claims": 2,
+        "supported_claims": 2,
+        "unsupported_claims": 0,
+        "faithfulness_rate": 100.0,
+        "unsupported_details": [],
+        "requires_manual_review": false
+      },
+      "citation_resolution": {
+        "total_claims": 5,
+        "resolvable_claims": 5,
+        "unresolvable_claims": 0,
+        "citation_resolution_rate": 100.0,
+        "unresolved_details": []
+      },
+      "required_fields": {
+        "total_fields": 9,
+        "present_fields": 9,
+        "missing_fields": [],
+        "field_presence_rate": 100.0
+      },
+      "case_id": "REAL-04",
+      "source_type": "real",
+      "test_category": "RCT - Oncology"
+    },
+    {
+      "paper_id": "30096290",
+      "title": "Effects of Aspirin for Primary Prevention in Persons with Diabetes Mellitus",
+      "numeric_faithfulness": {
+        "total_numeric_claims": 3,
+        "supported_claims": 3,
+        "unsupported_claims": 0,
+        "faithfulness_rate": 100.0,
+        "unsupported_details": [],
+        "requires_manual_review": false
+      },
+      "citation_resolution": {
+        "total_claims": 5,
+        "resolvable_claims": 5,
+        "unresolvable_claims": 0,
+        "citation_resolution_rate": 100.0,
+        "unresolved_details": []
+      },
+      "required_fields": {
+        "total_fields": 9,
+        "present_fields": 9,
+        "missing_fields": [],
+        "field_presence_rate": 100.0
+      },
+      "case_id": "REAL-05",
+      "source_type": "real",
+      "test_category": "RCT - Primary Prevention"
+    },
+    {
+      "paper_id": "32678832",
+      "title": "Remdesivir for 5 or 10 Days in Patients with Severe Covid-19",
+      "numeric_faithfulness": {
+        "total_numeric_claims": 4,
+        "supported_claims": 4,
+        "unsupported_claims": 0,
+        "faithfulness_rate": 100.0,
+        "unsupported_details": [],
+        "requires_manual_review": false
+      },
+      "citation_resolution": {
+        "total_claims": 5,
+        "resolvable_claims": 5,
+        "unresolvable_claims": 0,
+        "citation_resolution_rate": 100.0,
+        "unresolved_details": []
+      },
+      "required_fields": {
+        "total_fields": 9,
+        "present_fields": 9,
+        "missing_fields": [],
+        "field_presence_rate": 100.0
+      },
+      "case_id": "REAL-06",
+      "source_type": "real",
+      "test_category": "RCT - Infectious Disease"
+    },
+    {
+      "paper_id": "34748385",
+      "title": "Oral Nirmatrelvir for High-Risk, Nonhospitalized Adults with Covid-19",
+      "numeric_faithfulness": {
+        "total_numeric_claims": 4,
+        "supported_claims": 4,
+        "unsupported_claims": 0,
+        "faithfulness_rate": 100.0,
+        "unsupported_details": [],
+        "requires_manual_review": false
+      },
+      "citation_resolution": {
+        "total_claims": 5,
+        "resolvable_claims": 5,
+        "unresolvable_claims": 0,
+        "citation_resolution_rate": 100.0,
+        "unresolved_details": []
+      },
+      "required_fields": {
+        "total_fields": 9,
+        "present_fields": 9,
+        "missing_fields": [],
+        "field_presence_rate": 100.0
+      },
+      "case_id": "REAL-07",
+      "source_type": "real",
+      "test_category": "RCT - Antiviral Therapy"
+    },
+    {
+      "paper_id": "29020584",
+      "title": "SGLT2 Inhibitors and Cardiovascular Outcomes in Type 2 Diabetes: A Meta-Analysis",
+      "numeric_faithfulness": {
+        "total_numeric_claims": 2,
+        "supported_claims": 2,
+        "unsupported_claims": 0,
+        "faithfulness_rate": 100.0,
+        "unsupported_details": [],
+        "requires_manual_review": false
+      },
+      "citation_resolution": {
+        "total_claims": 5,
+        "resolvable_claims": 5,
+        "unresolvable_claims": 0,
+        "citation_resolution_rate": 100.0,
+        "unresolved_details": []
+      },
+      "required_fields": {
+        "total_fields": 9,
+        "present_fields": 9,
+        "missing_fields": [],
+        "field_presence_rate": 100.0
+      },
+      "case_id": "REAL-08",
+      "source_type": "real",
+      "test_category": "Meta-Analysis - Endocrinology"
+    },
+    {
+      "paper_id": "32706954",
+      "title": "International Evaluation of an AI System for Breast Cancer Screening",
+      "numeric_faithfulness": {
+        "total_numeric_claims": 2,
+        "supported_claims": 2,
+        "unsupported_claims": 0,
+        "faithfulness_rate": 100.0,
+        "unsupported_details": [],
+        "requires_manual_review": false
+      },
+      "citation_resolution": {
+        "total_claims": 5,
+        "resolvable_claims": 5,
+        "unresolvable_claims": 0,
+        "citation_resolution_rate": 100.0,
+        "unresolved_details": []
+      },
+      "required_fields": {
+        "total_fields": 9,
+        "present_fields": 9,
+        "missing_fields": [],
+        "field_presence_rate": 100.0
+      },
+      "case_id": "REAL-09",
+      "source_type": "real",
+      "test_category": "Diagnostic AI - Radiology"
+    },
+    {
+      "paper_id": "34185703",
+      "title": "Mediterranean Diet Adherence and CKD Progression in Diabetic Nephropathy",
+      "numeric_faithfulness": {
+        "total_numeric_claims": 2,
+        "supported_claims": 2,
+        "unsupported_claims": 0,
+        "faithfulness_rate": 100.0,
+        "unsupported_details": [],
+        "requires_manual_review": false
+      },
+      "citation_resolution": {
+        "total_claims": 5,
+        "resolvable_claims": 5,
+        "unresolvable_claims": 0,
+        "citation_resolution_rate": 100.0,
+        "unresolved_details": []
+      },
+      "required_fields": {
+        "total_fields": 9,
+        "present_fields": 9,
+        "missing_fields": [],
+        "field_presence_rate": 100.0
+      },
+      "case_id": "REAL-10",
+      "source_type": "real",
+      "test_category": "Observational - Nephrology"
+    },
+    {
+      "paper_id": "33027668",
+      "title": "Tocilizumab in Hospitalized Patients with Severe Covid-19 Pneumonia",
+      "numeric_faithfulness": {
+        "total_numeric_claims": 4,
+        "supported_claims": 4,
+        "unsupported_claims": 0,
+        "faithfulness_rate": 100.0,
+        "unsupported_details": [],
+        "requires_manual_review": false
+      },
+      "citation_resolution": {
+        "total_claims": 5,
+        "resolvable_claims": 5,
+        "unresolvable_claims": 0,
+        "citation_resolution_rate": 100.0,
+        "unresolved_details": []
+      },
+      "required_fields": {
+        "total_fields": 9,
+        "present_fields": 9,
+        "missing_fields": [],
+        "field_presence_rate": 100.0
+      },
+      "case_id": "REAL-11",
+      "source_type": "real",
+      "test_category": "RCT - Critical Care"
+    },
+    {
+      "paper_id": "32835977",
+      "title": "Effect of Hydroxychloroquine on Covid-19 Postexposure Prophylaxis",
+      "numeric_faithfulness": {
+        "total_numeric_claims": 4,
+        "supported_claims": 4,
+        "unsupported_claims": 0,
+        "faithfulness_rate": 100.0,
+        "unsupported_details": [],
+        "requires_manual_review": false
+      },
+      "citation_resolution": {
+        "total_claims": 5,
+        "resolvable_claims": 5,
+        "unresolvable_claims": 0,
+        "citation_resolution_rate": 100.0,
+        "unresolved_details": []
+      },
+      "required_fields": {
+        "total_fields": 9,
+        "present_fields": 9,
+        "missing_fields": [],
+        "field_presence_rate": 100.0
+      },
+      "case_id": "REAL-12",
+      "source_type": "real",
+      "test_category": "RCT - Postexposure Prophylaxis"
+    },
+    {
+      "paper_id": "SYNTHETIC",
+      "title": "SYNTHETIC: Prospective Adaptive Protocol for Sepsis Resuscitation (No Results Reported)",
+      "numeric_faithfulness": {
+        "total_numeric_claims": 0,
+        "supported_claims": 0,
+        "unsupported_claims": 0,
+        "faithfulness_rate": 100.0,
+        "unsupported_details": [],
+        "requires_manual_review": false
+      },
+      "citation_resolution": {
+        "total_claims": 4,
+        "resolvable_claims": 4,
+        "unresolvable_claims": 0,
+        "citation_resolution_rate": 100.0,
+        "unresolved_details": []
+      },
+      "required_fields": {
+        "total_fields": 9,
+        "present_fields": 9,
+        "missing_fields": [],
+        "field_presence_rate": 100.0
+      },
+      "case_id": "SYNTH-01",
+      "source_type": "synthetic",
+      "test_category": "Synthetic - Missing Results Edge Case"
+    },
+    {
+      "paper_id": "SYNTHETIC",
+      "title": "SYNTHETIC: Circulating Biomarker Delta and Atherosclerotic Event Risk (Inconclusive Findings)",
+      "numeric_faithfulness": {
+        "total_numeric_claims": 2,
+        "supported_claims": 2,
+        "unsupported_claims": 0,
+        "faithfulness_rate": 100.0,
+        "unsupported_details": [],
+        "requires_manual_review": false
+      },
+      "citation_resolution": {
+        "total_claims": 5,
+        "resolvable_claims": 5,
+        "unresolvable_claims": 0,
+        "citation_resolution_rate": 100.0,
+        "unresolved_details": []
+      },
+      "required_fields": {
+        "total_fields": 9,
+        "present_fields": 9,
+        "missing_fields": [],
+        "field_presence_rate": 100.0
+      },
+      "case_id": "SYNTH-02",
+      "source_type": "synthetic",
+      "test_category": "Synthetic - Contradictory/Inconclusive Edge Case"
+    },
+    {
+      "paper_id": "SYNTHETIC",
+      "title": "SYNTHETIC: Gene Replacement in Ultra-Rare Pediatric Dystrophy (Small Sample Size n=6)",
+      "numeric_faithfulness": {
+        "total_numeric_claims": 3,
+        "supported_claims": 3,
+        "unsupported_claims": 0,
+        "faithfulness_rate": 100.0,
+        "unsupported_details": [],
+        "requires_manual_review": false
+      },
+      "citation_resolution": {
+        "total_claims": 5,
+        "resolvable_claims": 5,
+        "unresolvable_claims": 0,
+        "citation_resolution_rate": 100.0,
+        "unresolved_details": []
+      },
+      "required_fields": {
+        "total_fields": 9,
+        "present_fields": 9,
+        "missing_fields": [],
+        "field_presence_rate": 100.0
+      },
+      "case_id": "SYNTH-03",
+      "source_type": "synthetic",
+      "test_category": "Synthetic - Very Small Sample Size Edge Case"
+    },
+    {
+      "paper_id": "SYNTHETIC",
+      "title": "SYNTHETIC: Multi-Arm Dosing of Novel Anticoagulant Factor-XIa Inhibitor (Dense Numerical Results)",
+      "numeric_faithfulness": {
+        "total_numeric_claims": 4,
+        "supported_claims": 4,
+        "unsupported_claims": 0,
+        "faithfulness_rate": 100.0,
+        "unsupported_details": [],
+        "requires_manual_review": false
+      },
+      "citation_resolution": {
+        "total_claims": 5,
+        "resolvable_claims": 5,
+        "unresolvable_claims": 0,
+        "citation_resolution_rate": 100.0,
+        "unresolved_details": []
+      },
+      "required_fields": {
+        "total_fields": 9,
+        "present_fields": 9,
+        "missing_fields": [],
+        "field_presence_rate": 100.0
+      },
+      "case_id": "SYNTH-04",
+      "source_type": "synthetic",
+      "test_category": "Synthetic - Number-Heavy Edge Case"
+    }
+  ]
+}
