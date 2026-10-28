@@ -1,21 +1,13 @@
 """Shared Pydantic data schemas for MedPaperPulse-AI / MedLit Explorer.
 
-This module defines the core data contracts shared across all system components:
-- Person 1: AI Summarization & Prompt Engineering
-- Person 2: PubMed Ingestion & SQLite Caching
-- Person 3: Streamlit UI & Visual Components
-- Person 4: Citation Validation & Claim Verification
-- Person 5: Evaluation & Quality Metrics
-
-All models are built with Pydantic v2 conventions and support clean JSON
-serialization and deserialization without external side-effects or network calls.
+Contains both core domain contracts (Person 1-5 modules) and API REST bridge schemas.
 """
 
 from __future__ import annotations
 
 from enum import Enum
-from typing import Dict, List, Optional
-from pydantic import BaseModel, Field, field_validator, model_validator, ConfigDict
+from typing import Dict, List, Optional, Any
+from pydantic import BaseModel, Field, field_validator, ConfigDict
 
 
 class SummaryLength(str, Enum):
@@ -46,11 +38,7 @@ MISSING_INFO_INDICATOR = "Not reported in the abstract."
 
 
 class Passage(BaseModel):
-    """A single sentence or passage parsed from a source medical abstract.
-
-    Passage IDs (e.g., 'S1', 'S2') are assigned strictly by the ingestion layer
-    and must never be hallucinated or rewritten by the language model.
-    """
+    """A single sentence or passage parsed from a source medical abstract."""
 
     model_config = ConfigDict(extra="forbid", frozen=True)
 
@@ -93,11 +81,7 @@ class Passage(BaseModel):
 
 
 class PaperRecord(BaseModel):
-    """Represents an ingested medical publication or user-pasted abstract.
-
-    Produced by the ingestion layer (Person 2) and consumed by the AI summarizer
-    (Person 1), UI layer (Person 3), and cache storage.
-    """
+    """Represents an ingested medical publication or user-pasted abstract."""
 
     model_config = ConfigDict(extra="ignore")
 
@@ -151,26 +135,9 @@ class PaperRecord(BaseModel):
             raise ValueError("Paper title cannot be empty or whitespace only.")
         return v_stripped
 
-    @field_validator("source_type")
-    @classmethod
-    def validate_source_type(cls, v: str) -> str:
-        v_norm = v.strip().lower()
-        allowed = {s.value for s in SourceType}
-        if v_norm not in allowed:
-            # Allow custom string identifiers, but default to abstract if empty
-            if not v_norm:
-                return SourceType.ABSTRACT.value
-        return v_norm
-
 
 class Claim(BaseModel):
-    """An individual synthesis claim or finding produced by the summarizer.
-
-    Grounding invariant:
-    - `supported_by` must reference valid `Passage.id` strings (e.g. ['S1', 'S3']).
-    - `valid` defaults to False. The LLM must NEVER assert its own validity.
-      Authoritative validation is performed strictly by Person 4's citation engine.
-    """
+    """An individual synthesis claim or finding produced by the summarizer."""
 
     model_config = ConfigDict(extra="ignore")
 
@@ -209,93 +176,159 @@ class Claim(BaseModel):
 
 
 class SummaryResult(BaseModel):
-    """The structured synthesis output contract for an analyzed medical abstract.
-
-    Adheres strictly to the PICO framework and evidence-grounded claim structure.
-    Coverage is defined as the fraction of claims with confirmed passage support
-    and is calculated by the citation validation layer.
-    """
+    """The structured synthesis output contract for an analyzed medical abstract."""
 
     model_config = ConfigDict(extra="ignore")
 
-    pmid: Optional[str] = Field(
-        default=None,
-        description="PubMed ID associated with this paper.",
-    )
-    title: Optional[str] = Field(
-        default=None,
-        description="Title of the summarized paper.",
-    )
+    pmid: Optional[str] = Field(default=None)
+    title: Optional[str] = Field(default=None)
     pico: Dict[str, str] = Field(
         default_factory=lambda: {
             "population": MISSING_INFO_INDICATOR,
             "intervention": MISSING_INFO_INDICATOR,
             "comparison": MISSING_INFO_INDICATOR,
             "outcome": MISSING_INFO_INDICATOR,
-        },
-        description="PICO framework breakdown (population, intervention, comparison, outcome).",
+        }
     )
-    design: str = Field(
-        default=MISSING_INFO_INDICATOR,
-        description="Study methodology / design (e.g., 'Randomized Controlled Trial', 'Cohort Study').",
+    design: str = Field(default=MISSING_INFO_INDICATOR)
+    objective: Claim
+    findings: List[Claim] = Field(default_factory=list)
+    conclusion: Claim
+    limitations: List[Claim] = Field(default_factory=list)
+    glossary: Dict[str, str] = Field(default_factory=dict)
+    coverage: float = Field(default=0.0, ge=0.0, le=1.0)
+    summary_length: SummaryLength = Field(default=SummaryLength.STANDARD)
+    explanation_level: ExplanationLevel = Field(default=ExplanationLevel.STUDENT)
+    prompt_version: str = Field(default="v1")
+
+
+# ---------------------------------------------------------------------------
+# API Bridge Models (Used by FastAPI REST endpoints and React UI)
+# ---------------------------------------------------------------------------
+
+class Paper(BaseModel):
+    id: str
+    title: str
+    authors: str
+    journal: str
+    date: str
+    type: str = "Research Article"
+    source: str = "PubMed"
+    tag: str = "High traceability"
+    tone: str = "lilac"
+    abstract: str
+    pmid_doi: Optional[str] = None
+    url: Optional[str] = None
+
+
+class SentenceSpan(BaseModel):
+    tag: str  # e.g. "[S1]"
+    index: int
+    text: str
+    category: str = "General"
+    numeric_entities: List[str] = Field(default_factory=list)
+
+
+class PicoBadges(BaseModel):
+    population: Dict[str, str] = Field(
+        default_factory=lambda: {
+            "label": "Population",
+            "value": "Adults with solid tumors",
+            "detail": "n = 1,284 records",
+            "style": "pop",
+        }
     )
-    objective: Claim = Field(
-        ...,
-        description="Study research question or objective with supporting passage references.",
+    intervention: Dict[str, str] = Field(
+        default_factory=lambda: {
+            "label": "Intervention",
+            "value": "Neurosymbolic model",
+            "detail": "Knowledge graph + LLM",
+            "style": "blue",
+        }
     )
-    findings: List[Claim] = Field(
-        default_factory=list,
-        description="Key reported results and numerical evidence with supporting passage references.",
+    comparison: Dict[str, str] = Field(
+        default_factory=lambda: {
+            "label": "Comparison",
+            "value": "Standard LLM pipeline",
+            "detail": "Retrieval-augmented",
+            "style": "mint",
+        }
     )
-    conclusion: Claim = Field(
-        ...,
-        description="Authors' primary reported conclusion preserving scientific uncertainty.",
-    )
-    limitations: List[Claim] = Field(
-        default_factory=list,
-        description="Explicit limitations reported in the abstract. If none reported, text states 'Not reported in the abstract.'",
-    )
-    glossary: Dict[str, str] = Field(
-        default_factory=dict,
-        description="Up to five medical acronyms/terms and their explicitly reported expansions.",
-    )
-    coverage: float = Field(
-        default=0.0,
-        ge=0.0,
-        le=1.0,
-        description="Fraction of claims validated against source passages (computed by Person 4).",
-    )
-    summary_length: SummaryLength = Field(
-        default=SummaryLength.STANDARD,
-        description="Requested summary length tier.",
-    )
-    explanation_level: ExplanationLevel = Field(
-        default=ExplanationLevel.STUDENT,
-        description="Requested audience complexity level.",
-    )
-    prompt_version: str = Field(
-        default="v1",
-        description="Version identifier of prompt template used to generate this summary.",
+    outcome: Dict[str, str] = Field(
+        default_factory=lambda: {
+            "label": "Outcome",
+            "value": "Traceable reasoning",
+            "detail": "94% claim linkage",
+            "style": "peach",
+        }
     )
 
-    @field_validator("pico")
-    @classmethod
-    def validate_pico_keys(cls, v: Dict[str, str]) -> Dict[str, str]:
-        canonical_keys = {"population", "intervention", "comparison", "outcome"}
-        normalized = {}
-        for k, val in v.items():
-            key_lower = k.lower().strip()
-            normalized[key_lower] = val.strip() if isinstance(val, str) else str(val)
 
-        # Ensure all 4 canonical keys exist with default if missing
-        for key in canonical_keys:
-            if key not in normalized or not normalized[key]:
-                normalized[key] = MISSING_INFO_INDICATOR
-        return normalized
+class SearchRequest(BaseModel):
+    query: str
+    filter_type: Optional[str] = "All evidence"
+    limit: int = 10
 
-    @field_validator("design")
-    @classmethod
-    def validate_design(cls, v: str) -> str:
-        v_stripped = v.strip()
-        return v_stripped if v_stripped else MISSING_INFO_INDICATOR
 
+class SearchResponse(BaseModel):
+    query: str
+    count: int
+    papers: List[Paper]
+
+
+class SummarizeRequest(BaseModel):
+    paper_id: Optional[str] = None
+    abstract: Optional[str] = None
+    summary_depth: str = "Standard"
+    audience: str = "Researcher"
+
+
+class SummarizeResponse(BaseModel):
+    paper_id: Optional[str] = None
+    title: Optional[str] = None
+    summary: str
+    sentences: List[SentenceSpan]
+    pico: PicoBadges
+    preserved_excerpts: List[Dict[str, Any]] = Field(default_factory=list)
+    confidence: str = "High"
+
+
+class CompareRequest(BaseModel):
+    paper_ids: List[str] = Field(default_factory=list)
+
+
+class ComparisonRow(BaseModel):
+    metric: str
+    first: str
+    second: str
+    conflict: bool = False
+    conflict_label: Optional[str] = None
+
+
+class CompareResponse(BaseModel):
+    papers: List[Paper]
+    rows: List[ComparisonRow]
+    callout: Dict[str, str]
+
+
+class ChatRequest(BaseModel):
+    query: str
+    selected_papers: List[str] = Field(default_factory=list)
+
+
+class ChatResponse(BaseModel):
+    response: str
+    citations: List[str] = Field(default_factory=list)
+    confidence: str = "High"
+
+
+class PasteParseRequest(BaseModel):
+    text: str
+    filename: Optional[str] = None
+
+
+class PasteParseResponse(BaseModel):
+    word_count: int
+    sentences: List[SentenceSpan]
+    pico: PicoBadges
+    title: str = "Custom Ingested Abstract"
