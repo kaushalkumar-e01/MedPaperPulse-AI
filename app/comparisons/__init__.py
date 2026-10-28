@@ -1,8 +1,19 @@
-"""Paper comparison matrix builder and conflict detector."""
+"""Paper comparison, matrix builder, and scientific conflict detection module."""
 
 from typing import List
 from app.models import Paper, ComparisonRow, CompareResponse
 from app.ingestion.pubmed_client import SEEDED_PAPERS
+
+from app.comparisons.comparator import (
+    ComparisonMatrix,
+    compare_papers,
+    STANDARD_COMPARISON_FIELDS,
+)
+from app.comparisons.conflict_detector import (
+    detect_conflicts,
+    ConflictAnalysisResult,
+    ComparisonStatus,
+)
 
 
 def build_comparison_matrix(paper_ids: List[str]) -> CompareResponse:
@@ -54,3 +65,14 @@ def build_comparison_matrix(paper_ids: List[str]) -> CompareResponse:
     }
 
     return CompareResponse(papers=matched, rows=rows, callout=callout)
+
+
+__all__ = [
+    "build_comparison_matrix",
+    "ComparisonMatrix",
+    "compare_papers",
+    "STANDARD_COMPARISON_FIELDS",
+    "detect_conflicts",
+    "ConflictAnalysisResult",
+    "ComparisonStatus",
+]
