@@ -1,0 +1,22 @@
+Please generate an evidence-grounded clinical summary for the following medical paper.
+
+SUMMARY CONFIGURATION:
+- Summary Length: {summary_length}
+- Explanation Level: {explanation_level}
+- Target Prompt Version: {prompt_version}
+
+PAPER METADATA:
+- Title: {title}
+- PMID: {pmid}
+
+SOURCE PASSAGES:
+Each sentence below is tagged with its official passage ID in brackets and its section label. Cite only these IDs in "supported_by":
+
+{passages_block}
+
+TASK INSTRUCTIONS:
+1. Synthesize the abstract into the requested JSON schema according to the system prompt rules.
+2. Ensure every claim in "objective", "findings", "conclusion", and "limitations" cites one or more exact passage IDs (e.g. ["S1"]).
+3. For any missing item in PICO, study design, or limitations, use the exact phrase: "Not reported in the abstract."
+4. Adapt language to "{explanation_level}" complexity and detail to "{summary_length}" length while strictly preserving all facts, numbers, and uncertainties.
+5. Return ONLY the valid JSON object.
