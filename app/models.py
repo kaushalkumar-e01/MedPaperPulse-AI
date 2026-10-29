@@ -201,6 +201,21 @@ class SummaryResult(BaseModel):
     explanation_level: ExplanationLevel = Field(default=ExplanationLevel.STUDENT)
     prompt_version: str = Field(default="v1")
 
+    @field_validator("pico")
+    @classmethod
+    def validate_pico_keys(cls, v: Dict[str, str]) -> Dict[str, str]:
+        canonical_keys = {"population", "intervention", "comparison", "outcome"}
+        normalized = {}
+        for k, val in v.items():
+            key_lower = k.lower().strip()
+            normalized[key_lower] = val.strip() if isinstance(val, str) else str(val)
+
+        for key in canonical_keys:
+            if key not in normalized or not normalized[key]:
+                normalized[key] = MISSING_INFO_INDICATOR
+        return normalized
+
+
 
 # ---------------------------------------------------------------------------
 # API Bridge Models (Used by FastAPI REST endpoints and React UI)
@@ -279,6 +294,7 @@ class SearchResponse(BaseModel):
 class SummarizeRequest(BaseModel):
     paper_id: Optional[str] = None
     abstract: Optional[str] = None
+    title: Optional[str] = None
     summary_depth: str = "Standard"
     audience: str = "Researcher"
 
@@ -291,16 +307,20 @@ class SummarizeResponse(BaseModel):
     pico: PicoBadges
     preserved_excerpts: List[Dict[str, Any]] = Field(default_factory=list)
     confidence: str = "High"
+    mode: str = "offline_deterministic"
+    provider_info: Optional[str] = None
 
 
 class CompareRequest(BaseModel):
     paper_ids: List[str] = Field(default_factory=list)
+    papers: Optional[List[Paper]] = None
 
 
 class ComparisonRow(BaseModel):
     metric: str
-    first: str
-    second: str
+    first: str = ""
+    second: str = ""
+    values: Dict[str, str] = Field(default_factory=dict)
     conflict: bool = False
     conflict_label: Optional[str] = None
 
@@ -309,17 +329,25 @@ class CompareResponse(BaseModel):
     papers: List[Paper]
     rows: List[ComparisonRow]
     callout: Dict[str, str]
+    conflicts: List[Dict[str, Any]] = Field(default_factory=list)
+    status: str = "Consistent"
 
 
 class ChatRequest(BaseModel):
     query: str
     selected_papers: List[str] = Field(default_factory=list)
+    active_paper_id: Optional[str] = None
+    active_paper_abstract: Optional[str] = None
+    passages: Optional[Dict[str, str]] = None
 
 
 class ChatResponse(BaseModel):
     response: str
     citations: List[str] = Field(default_factory=list)
     confidence: str = "High"
+    is_grounded: bool = True
+    status: str = "GROUNDED"
+    mode: str = "grounded_passage_search"
 
 
 class PasteParseRequest(BaseModel):
@@ -332,3 +360,37 @@ class PasteParseResponse(BaseModel):
     sentences: List[SentenceSpan]
     pico: PicoBadges
     title: str = "Custom Ingested Abstract"
+
+
+class BatchItemInput(BaseModel):
+    id: str
+    title: Optional[str] = None
+    abstract: str
+
+
+class BatchSummarizeRequest(BaseModel):
+    papers: List[BatchItemInput]
+    summary_depth: str = "Standard"
+    audience: str = "Researcher"
+
+
+class BatchItemResult(BaseModel):
+    id: str
+    title: str
+    status: str  # "success" or "error"
+    error_message: Optional[str] = None
+    summary: Optional[str] = None
+    sentences: List[SentenceSpan] = Field(default_factory=list)
+    pico: Optional[PicoBadges] = None
+    processing_time_ms: float = 0.0
+    mode: Optional[str] = None
+
+
+class BatchSummarizeResponse(BaseModel):
+    total: int
+    successful: int
+    failed: int
+    max_batch_size: int = 10
+    total_time_ms: float
+    results: List[BatchItemResult]
+

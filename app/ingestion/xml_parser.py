@@ -65,3 +65,4 @@ def parse_pubmed_xml(xml_content: str) -> List[Paper]:
         pass
 
     return papers
+

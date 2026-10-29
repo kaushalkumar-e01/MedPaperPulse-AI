@@ -54,3 +54,4 @@ def tag_sentences(text: str) -> List[SentenceSpan]:
         )
 
     return spans
+

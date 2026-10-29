@@ -1,4 +1,4 @@
-﻿"""AI Summarization Service for MedPaperPulse-AI / MedLit Explorer.
+"""AI Summarization Service for MedPaperPulse-AI / MedLit Explorer.
 
 Provides evidence-grounded clinical abstract summarization with strict
 PICO extraction, citation tracking, and structured output validation.
@@ -436,14 +436,21 @@ from app.ingestion.pubmed_client import SEEDED_PAPERS
 def generate_grounded_summary(
     paper_id: Optional[str] = None,
     raw_abstract: Optional[str] = None,
+    title: Optional[str] = None,
     depth: str = "Standard",
     audience: str = "Researcher",
+    use_llm: bool = True,
 ) -> SummarizeResponse:
-    """Produces a grounded summary with explicit sentence citations and preserved excerpts."""
+    """Produces a grounded summary with explicit sentence citations and preserved excerpts.
+
+    If OPENAI_API_KEY or LLM_API_KEY is configured, attempts live model generation.
+    Otherwise, uses the deterministic grounded rule engine, clearly labeled as offline.
+    """
+    from app.ingestion.paste_parser import parse_pasted_text
 
     paper_obj = next((p for p in SEEDED_PAPERS if p.id == paper_id), None)
-    text = raw_abstract or (paper_obj.abstract if paper_obj else "")
-    title = paper_obj.title if paper_obj else "Evidence Workspace"
+    text = (raw_abstract or (paper_obj.abstract if paper_obj else "")).strip()
+    paper_title = title or (paper_obj.title if paper_obj else "Evidence Workspace")
 
     if not text:
         text = (
@@ -455,31 +462,88 @@ def generate_grounded_summary(
             "The study was limited by retrospective records and a single-institution evaluation cohort."
         )
 
-    sentences = tag_sentences(text)
+    # Segment sentences and extract PICO
+    sentences, pico = parse_pasted_text(text)
 
-    results_tag = "[S3]" if len(sentences) >= 3 else (sentences[0].tag if sentences else "[S1]")
-    methods_tag = "[S1]" if len(sentences) >= 1 else "[S1]"
-    eval_tag = "[S4]" if len(sentences) >= 4 else (sentences[-1].tag if sentences else "[S1]")
+    # Check for live LLM provider configuration
+    from app.ai.gemini_client import is_gemini_available, generate_gemini_summary
+    mode = "offline_deterministic"
+    provider_info = "Deterministic Grounded Engine (Offline Mode)"
+    ai_success = False
 
-    if depth == "Short":
-        summary_text = (
-            f"A hybrid language model plus domain knowledge graph improves evidence alignment "
-            f"and makes clinical reasoning inspectable {results_tag}."
-        )
-    elif depth == "Detailed":
-        summary_text = (
-            f"The authors present a hybrid clinical AI architecture coupling deep sequence models with explicit "
-            f"domain knowledge graphs {methods_tag}. The key contribution is not only stronger empirical alignment, "
-            f"but a legible audit trail from model prediction to underlying biomedical literature, with explicit "
-            f"relations preserving provenance for clinical reviewers {results_tag}. For a {audience.lower()} perspective, "
-            f"qualitative evaluations showed that grounded explanations significantly improved trust and decision support {eval_tag}."
-        )
-    else:  # Standard
-        summary_text = (
-            f"The authors present a hybrid clinical AI design that pairs a language model with an oncology knowledge graph. "
-            f"The key contribution is stronger empirical performance alongside an inspectable path from prediction to underlying evidence {results_tag}. "
-            f"For a {audience.lower()} persona, explicit biomedical relationships clarify why conclusions were reached {eval_tag}."
-        )
+    if use_llm and is_gemini_available():
+        try:
+            passages_payload = [{"id": s.tag.strip("[]"), "text": s.text} for s in sentences]
+            gemini_res = generate_gemini_summary(paper_title, passages_payload, depth=depth, audience=audience)
+            summary_text = gemini_res.get("summary", "")
+            gem_pico = gemini_res.get("pico")
+            if gem_pico and isinstance(gem_pico, dict):
+                pico = PicoBadges(
+                    population={"label": "Population", "value": gem_pico.get("population", {}).get("value", pico.population["value"]), "detail": gem_pico.get("population", {}).get("detail", pico.population["detail"]), "style": "pop"},
+                    intervention={"label": "Intervention", "value": gem_pico.get("intervention", {}).get("value", pico.intervention["value"]), "detail": gem_pico.get("intervention", {}).get("detail", pico.intervention["detail"]), "style": "blue"},
+                    comparison={"label": "Comparison", "value": gem_pico.get("comparison", {}).get("value", pico.comparison["value"]), "detail": gem_pico.get("comparison", {}).get("detail", pico.comparison["detail"]), "style": "mint"},
+                    outcome={"label": "Outcome", "value": gem_pico.get("outcome", {}).get("value", pico.outcome["value"]), "detail": gem_pico.get("outcome", {}).get("detail", pico.outcome["detail"]), "style": "peach"},
+                )
+            mode = "gemini_generated"
+            provider_info = f"Google Gemini ({os.getenv('GEMINI_MODEL', 'gemini-3.5-flash')})"
+            ai_success = True
+        except Exception as exc:
+            logger.warning("Gemini summarization fallback: %s", exc)
+            mode = "offline_deterministic"
+            provider_info = f"Offline Grounded Fallback (Gemini: {str(exc)[:50]})"
+
+    elif use_llm and (os.getenv("OPENAI_API_KEY") or os.getenv("LLM_API_KEY")):
+        try:
+            from app.models import PaperRecord, Passage
+            passages = [Passage(id=s.tag.strip("[]"), text=s.text, section=s.category) for s in sentences]
+            record = PaperRecord(
+                pmid=paper_id if paper_id and "pmid" in paper_id.lower() else None,
+                title=paper_title,
+                passages=passages,
+            )
+            result = summarize_paper(
+                paper=record,
+                length=depth.lower(),
+                level=audience.lower(),
+                max_retries=1,
+            )
+            findings_text = " ".join([f"{f.text} [{', '.join(f.supported_by)}]" for f in result.findings])
+            llm_summary = f"{result.objective.text} {findings_text} {result.conclusion.text}"
+            mode = "llm_generated"
+            provider_info = f"OpenAI ({os.getenv('MODEL_NAME', 'gpt-4o-mini')})"
+            summary_text = llm_summary
+            ai_success = True
+        except Exception as exc:
+            logger.warning("LLM summarization fallback: %s", exc)
+            mode = "offline_deterministic"
+            provider_info = f"Offline Grounded Fallback (LLM unavailable: {str(exc)[:50]})"
+
+    if not ai_success:
+        if not sentences:
+            summary_text = "No clinical text available to synthesize."
+        else:
+            s_obj = sentences[0]
+            s_res = next(
+                (s for s in sentences if s.category == "Results" or s.numeric_entities),
+                sentences[len(sentences) // 2] if len(sentences) > 1 else sentences[0],
+            )
+            s_concl = sentences[-1] if len(sentences) > 1 else sentences[0]
+
+            if depth == "Short":
+                summary_text = f"{s_res.text} {s_res.tag}"
+            elif depth == "Detailed":
+                summary_text = (
+                    f"Objective: {s_obj.text} {s_obj.tag} "
+                    f"Findings: {s_res.text} {s_res.tag} "
+                    f"Conclusion: {s_concl.text} {s_concl.tag} "
+                    f"Audience focus: Tailored for a {audience.lower()} evidence review."
+                )
+            else:  # Standard
+                summary_text = (
+                    f"{s_obj.text} {s_obj.tag} "
+                    f"{s_res.text} {s_res.tag} "
+                    f"{s_concl.text} {s_concl.tag}"
+                )
 
     numeric_sentences = [s for s in sentences if s.numeric_entities]
     key_sentence = numeric_sentences[0] if numeric_sentences else (sentences[2] if len(sentences) > 2 else sentences[0])
@@ -494,14 +558,14 @@ def generate_grounded_summary(
         }
     ]
 
-    pico = PicoBadges()
-
     return SummarizeResponse(
         paper_id=paper_id,
-        title=title,
+        title=paper_title,
         summary=summary_text,
         sentences=sentences,
         pico=pico,
         preserved_excerpts=preserved,
         confidence="High",
+        mode=mode,
+        provider_info=provider_info,
     )

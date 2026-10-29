@@ -33,16 +33,16 @@ def _extract_paper_id(paper: Any, index: int) -> str:
     """Extracts paper identity (title or PMID), preserving original identifier."""
     if isinstance(paper, Mapping):
         ident = (
-            paper.get("pmid")
+            paper.get("id")
             or paper.get("title")
-            or paper.get("id")
+            or paper.get("pmid")
             or paper.get("paper_id")
             or paper.get("name")
         )
         if ident:
             return str(ident).strip()
     elif hasattr(paper, "pmid") or hasattr(paper, "title"):
-        ident = getattr(paper, "pmid", None) or getattr(paper, "title", None) or getattr(paper, "id", None)
+        ident = getattr(paper, "id", None) or getattr(paper, "pmid", None) or getattr(paper, "title", None)
         if ident:
             return str(ident).strip()
 
@@ -98,9 +98,9 @@ class ComparisonMatrix:
 
 def compare_papers(papers: list[Any]) -> ComparisonMatrix:
     """Generates a comparison matrix for 2 or 3 paper summaries."""
-    if not papers or len(papers) < 2 or len(papers) > 3:
+    if not papers or len(papers) < 2 or len(papers) > 10:
         raise ValueError(
-            f"Paper comparison requires exactly 2 or 3 papers, got {len(papers) if papers else 0}."
+            f"Paper comparison requires between 2 and 10 papers, got {len(papers) if papers else 0}."
         )
 
     paper_ids = [_extract_paper_id(p, i) for i, p in enumerate(papers)]
