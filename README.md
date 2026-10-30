@@ -13,6 +13,8 @@ MedPaperPulse-AI is an educational and research-support platform designed to syn
 - **PICO Framework Extraction**: Automatically parses Population, Intervention, Comparison, and Outcome.
 - **Honest Missingness Standard**: Missing variables, unstated study designs, or unreported limitations explicitly state `"Not reported in the abstract."`.
 - **Quality & Evaluation Suite**: Automated verification of citation resolution, numeric faithfulness, and required-field completeness across a 16-abstract benchmark dataset.
+- **Persistent SQLite Caching**: Transparently caches PubMed API queries and records with time-to-live (TTL) expiration.
+- **Multi-Study Comparison Matrix**: Dynamic side-by-side study comparison with automated scientific conflict and opposing finding detection.
 
 ---
 
@@ -21,8 +23,8 @@ MedPaperPulse-AI is an educational and research-support platform designed to syn
 | Role | Module | Ownership |
 |---|---|---|
 | **Person 1** | `app/models.py`, `app/ai/`, `prompts/` | AI Summarization, Shared Pydantic Contracts, Prompt Engineering |
-| **Person 2** | `app/ingestion/`, `app/storage/` | PubMed NCBI E-Utilities Ingestion & SQLite Caching |
-| **Person 3** | `streamlit_app.py`, `app/ui/` | Streamlit User Interface & Visual Workspace |
+| **Person 2** | `app/ingestion/`, `app/storage/` | PubMed NCBI E-Utilities Ingestion & Persistent SQLite Caching |
+| **Person 3** | `frontend/`, `main.py` | React Frontend, FastAPI REST API Bridge & Service Endpoints |
 | **Person 4** | `app/citations/`, `app/comparisons/` | Citation Entailment Verification & Cross-Study Comparison Matrix |
 | **Person 5** | `data/test_set.json`, `eval/`, `docs/` | Evaluation Dataset, Automated Metrics, LLM Judge, QA & Benchmarking |
 
@@ -58,19 +60,53 @@ python -m eval.evaluate --mock --verbose
 # Run evaluation with optional LLM judge
 python -m eval.evaluate --mock --llm-judge
 
-# Run with live LLM provider (requires LLM_API_KEY)
+# Run with live LLM provider (requires GEMINI_API_KEY or OPENAI_API_KEY)
 python -m eval.evaluate --live
 ```
 
 ### Running Test Suites
 
 ```bash
-# Run Person 1 core tests (models, prompts, summarizer)
-python -m pytest tests/test_models.py tests/test_prompts.py tests/test_summarizer.py -v
+# Run entire test suite across all modules (87 tests)
+pytest -v
 
-# Run Person 5 evaluation tests
-python -m pytest eval/test_eval.py -v
+# Or run specific test modules
+pytest tests/test_models.py tests/test_prompts.py tests/test_summarizer.py -v
+pytest tests/test_cache.py tests/test_compare.py tests/test_pubmed_client.py -v
+pytest eval/test_eval.py -v
 ```
+
+---
+
+## How to Run the Application
+
+### 1. Environment Setup
+```powershell
+# Create and activate virtual environment (if not already done)
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+
+# Install required dependencies
+pip install -r requirements.txt
+```
+
+### 2. Configure Environment Variables (Optional)
+Copy `.env.example` to `.env` and fill in any desired API keys:
+```powershell
+cp .env.example .env
+```
+*Note: If no API keys are configured, the system automatically runs in offline deterministic mode with zero hallucination and rule-based evidence synthesis.*
+
+### 3. Start the Backend API Server
+```powershell
+python main.py
+# Or directly via uvicorn:
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
+Once started, the API and interactive documentation are available at:
+- **Interactive Swagger UI**: [http://localhost:8000/docs](http://localhost:8000/docs)
+- **ReDoc API Documentation**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
+- **Service Health Check**: [http://localhost:8000/api/health](http://localhost:8000/api/health)
 
 ---
 
@@ -86,11 +122,6 @@ A dual-reviewer rubric is established in `eval/manual_review_template.csv`:
 ## Demo Walkthrough
 
 A structured 4–5 minute walkthrough script and recording checklist are available in [`docs/demo_script.md`](docs/demo_script.md).
-
-To run the Streamlit app locally:
-```bash
-streamlit run streamlit_app.py
-```
 
 ---
 

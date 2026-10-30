@@ -1,9 +1,22 @@
 """Parser for pasted or uploaded abstracts with PICO extraction and honest missingness."""
 
+from __future__ import annotations
+
 import re
 from typing import Tuple, List
 from app.models import SentenceSpan, PicoBadges, MISSING_INFO_INDICATOR
 from app.ingestion.sentence_tagger import tag_sentences
+
+
+def _clean_pico_val(text: str, max_len: int = 120) -> str:
+    """Strips leading section labels and formats snippet cleanly without mid-word truncation."""
+    cleaned = re.sub(r"^(?:background|methods|results|conclusions?|objective):\s*", "", text.strip(), flags=re.IGNORECASE)
+    if len(cleaned) > max_len:
+        truncated = cleaned[:max_len]
+        if " " in truncated:
+            return truncated.rsplit(" ", 1)[0] + "..."
+        return truncated + "..."
+    return cleaned
 
 
 def parse_pasted_text(text: str) -> Tuple[List[SentenceSpan], PicoBadges]:
@@ -50,12 +63,12 @@ def parse_pasted_text(text: str) -> Tuple[List[SentenceSpan], PicoBadges]:
                     pop_detail = f"n = {n_match.group(1)} records"
                 else:
                     pop_detail = "Target cohort"
-                pop_text = txt[:65] + "…" if len(txt) > 65 else txt
+                pop_text = _clean_pico_val(txt)
 
         # 2. Intervention extraction
         if not interv_text or interv_detail == "Unstated in abstract":
             if any(w in txt_l for w in ["assigned to receive", "evaluated", "administered", "treated with", "dose", "vaccine", "model", "therapy", "intervention", "drug"]):
-                interv_text = txt[:65] + "…" if len(txt) > 65 else txt
+                interv_text = _clean_pico_val(txt)
                 interv_detail = "Active protocol"
 
         # 3. Comparison extraction
@@ -68,14 +81,14 @@ def parse_pasted_text(text: str) -> Tuple[List[SentenceSpan], PicoBadges]:
                     comp_text = "Standard of care"
                     comp_detail = "Standard comparator"
                 else:
-                    comp_text = txt[:65] + "…" if len(txt) > 65 else txt
+                    comp_text = _clean_pico_val(txt)
                     comp_detail = "Control cohort"
 
         # 4. Outcome extraction (if not a pure protocol without results)
         if not is_protocol:
             if not out_text or out_detail == "Unstated in abstract":
                 if any(w in txt_l for w in ["efficacy", "incidence", "reduced", "improved", "hazard ratio", "survival", "percentage", "%", "p<", "p="]):
-                    out_text = txt[:65] + "…" if len(txt) > 65 else txt
+                    out_text = _clean_pico_val(txt)
                     if span.numeric_entities:
                         out_detail = f"{span.numeric_entities[0]} reported"
                     else:

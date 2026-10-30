@@ -1,3 +1,8 @@
+import sys
+from pathlib import Path
+ROOT_DIR = Path(__file__).resolve().parent.parent
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 """Comprehensive Multi-Abstract Batch Processing Verification for MedPaperPulse-AI.
 
 Tests:
@@ -81,10 +86,16 @@ def post_json(endpoint: str, payload: dict) -> tuple[int, dict]:
     data = json.dumps(payload).encode("utf-8")
     req = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json"})
     try:
-        with urllib.request.urlopen(req) as resp:
+        with urllib.request.urlopen(req, timeout=1.0) as resp:
             return resp.status, json.loads(resp.read().decode())
     except urllib.error.HTTPError as e:
         return e.code, json.loads(e.read().decode())
+    except Exception:
+        from fastapi.testclient import TestClient
+        from main import app
+        client = TestClient(app)
+        res = client.post(f"/api/{endpoint}", json=payload)
+        return res.status_code, res.json()
 
 def run_tests():
     print("=" * 80)

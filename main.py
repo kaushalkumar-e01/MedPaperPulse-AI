@@ -48,6 +48,30 @@ app.add_middleware(
 )
 
 
+@app.get("/")
+async def root():
+    """Root entry point providing service discovery and OpenAPI documentation links."""
+    return {
+        "service": "MedPaperPulse-AI API Bridge",
+        "status": "online",
+        "documentation": "/docs",
+        "health": "/api/health",
+        "endpoints": [
+            "/api/health",
+            "/api/papers",
+            "/api/search",
+            "/api/summarize",
+            "/api/compare",
+            "/api/paste",
+            "/api/upload",
+            "/api/upload-batch",
+            "/api/chat",
+            "/api/batch-summarize",
+            "/api/eval/metrics",
+            "/api/eval/run",
+        ],
+    }
+
 @app.get("/api/health")
 async def health_check():
     """Health check endpoint with active AI provider status."""

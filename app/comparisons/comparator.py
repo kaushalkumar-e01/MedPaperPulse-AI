@@ -55,9 +55,11 @@ def _get_field_value(paper: Any, field_name: str) -> str:
     
     val = None
     if isinstance(paper, Mapping):
+        # Case-insensitive mapping lookup
+        paper_lower_map = {str(k).lower().strip(): v for k, v in paper.items()}
         for syn in synonyms:
-            if syn in paper and paper[syn] is not None:
-                val = paper[syn]
+            if syn in paper_lower_map and paper_lower_map[syn] is not None:
+                val = paper_lower_map[syn]
                 break
     else:
         for syn in synonyms:

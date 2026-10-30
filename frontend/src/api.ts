@@ -2,7 +2,6 @@
  * API client bridging the Manus AI React frontend with the FastAPI backend.
  */
 
-const API_BASE_URL = "http://localhost:8000/api";
 const getApiBaseUrl = () => {
   if (typeof window !== "undefined") {
     const host = window.location.hostname || "localhost";
@@ -127,7 +126,6 @@ export interface ChatResponse {
  */
 export async function searchLiterature(query: string, filterType = "All evidence"): Promise<Paper[]> {
   try {
-    const res = await fetch(`${API_BASE_URL}/search`, {
     const res = await safeFetch("/search", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -153,7 +151,6 @@ export async function summarizeLiterature(
   audience = "Researcher"
 ): Promise<SummarizeResponse | null> {
   try {
-    const res = await fetch(`${API_BASE_URL}/summarize`, {
     const res = await safeFetch("/summarize", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -181,7 +178,6 @@ export async function compareLiterature(
   papers?: Paper[]
 ): Promise<CompareResponse | null> {
   try {
-    const res = await fetch(`${API_BASE_URL}/compare`, {
     const res = await safeFetch("/compare", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -200,7 +196,6 @@ export async function compareLiterature(
  */
 export async function parsePastedAbstract(text: string): Promise<PasteResponse | null> {
   try {
-    const res = await fetch(`${API_BASE_URL}/paste`, {
     const res = await safeFetch("/paste", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -223,7 +218,6 @@ export async function sendChatMessage(
   activePaper?: { id: string; abstract?: string; title?: string }
 ): Promise<ChatResponse | null> {
   try {
-    const res = await fetch(`${API_BASE_URL}/chat`, {
     const res = await safeFetch("/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -247,7 +241,6 @@ export async function sendChatMessage(
  */
 export async function fetchInitialPapers(): Promise<Paper[]> {
   try {
-    const res = await fetch(`${API_BASE_URL}/papers`);
     const res = await safeFetch("/papers");
     if (!res.ok) throw new Error(`Papers fetch error: ${res.statusText}`);
     const data = await res.json();
@@ -263,7 +256,6 @@ export async function fetchInitialPapers(): Promise<Paper[]> {
  */
 export async function checkBackendHealth(): Promise<any> {
   try {
-    const res = await fetch(`${API_BASE_URL}/health`);
     const res = await safeFetch("/health");
     if (!res.ok) return null;
     return await res.json();
@@ -317,7 +309,6 @@ export async function uploadDocument(file: File, userTitle?: string): Promise<Do
     formData.append("title", userTitle);
   }
 
-  const res = await fetch(`${API_BASE_URL}/upload`, {
   const res = await safeFetch("/upload", {
     method: "POST",
     body: formData,
@@ -340,7 +331,6 @@ export async function uploadBatchDocuments(files: File[]): Promise<any> {
     formData.append("files", file);
   }
 
-  const res = await fetch(`${API_BASE_URL}/upload-batch`, {
   const res = await safeFetch("/upload-batch", {
     method: "POST",
     body: formData,
@@ -363,7 +353,6 @@ export async function batchSummarizeLiterature(
   audience = "Researcher"
 ): Promise<BatchSummarizeResponse | null> {
   try {
-    const res = await fetch(`${API_BASE_URL}/batch-summarize`, {
     const res = await safeFetch("/batch-summarize", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -428,7 +417,6 @@ export interface EvalMetricsResponse {
  */
 export async function fetchEvaluationMetrics(): Promise<EvalMetricsResponse | null> {
   try {
-    const res = await fetch(`${API_BASE_URL}/eval/metrics`);
     const res = await safeFetch("/eval/metrics");
     if (!res.ok) throw new Error(`Eval metrics error: ${res.statusText}`);
     return await res.json();
@@ -443,7 +431,6 @@ export async function fetchEvaluationMetrics(): Promise<EvalMetricsResponse | nu
  */
 export async function runLiveEvaluation(): Promise<EvalMetricsResponse | null> {
   try {
-    const res = await fetch(`${API_BASE_URL}/eval/run`, {
     const res = await safeFetch("/eval/run", {
       method: "POST",
     });

@@ -26,9 +26,9 @@
       "meets_target": true
     },
     "llm_judge_score": {
-      "average_score": 5.0,
+      "average_score": null,
       "target_score": 4.0,
-      "evaluated_count": 16
+      "evaluated_count": 0
     }
   },
   "per_case_results": [
@@ -58,18 +58,7 @@
       },
       "case_id": "REAL-01",
       "source_type": "real",
-      "test_category": "RCT - Infectious Disease",
-      "llm_judge": {
-        "judge_model": "mock-judge",
-        "evaluation_date": "2026-10-28T15:14:25.915877",
-        "factual_consistency": 5,
-        "completeness": 5,
-        "readability": 5,
-        "evidence_support": 5,
-        "overall_score": 5.0,
-        "explanation": "Mocked deterministic evaluation report.",
-        "unsupported_claims": []
-      }
+      "test_category": "RCT - Infectious Disease"
     },
     {
       "paper_id": "35675402",
@@ -97,18 +86,7 @@
       },
       "case_id": "REAL-02",
       "source_type": "real",
-      "test_category": "RCT - Endocrinology",
-      "llm_judge": {
-        "judge_model": "mock-judge",
-        "evaluation_date": "2026-10-28T15:14:25.916931",
-        "factual_consistency": 5,
-        "completeness": 5,
-        "readability": 5,
-        "evidence_support": 5,
-        "overall_score": 5.0,
-        "explanation": "Mocked deterministic evaluation report.",
-        "unsupported_claims": []
-      }
+      "test_category": "RCT - Endocrinology"
     },
     {
       "paper_id": "31597011",
@@ -136,18 +114,7 @@
       },
       "case_id": "REAL-03",
       "source_type": "real",
-      "test_category": "RCT - Cardiology",
-      "llm_judge": {
-        "judge_model": "mock-judge",
-        "evaluation_date": "2026-10-28T15:14:25.917683",
-        "factual_consistency": 5,
-        "completeness": 5,
-        "readability": 5,
-        "evidence_support": 5,
-        "overall_score": 5.0,
-        "explanation": "Mocked deterministic evaluation report.",
-        "unsupported_claims": []
-      }
+      "test_category": "RCT - Cardiology"
     },
     {
       "paper_id": "31862284",
@@ -175,18 +142,7 @@
       },
       "case_id": "REAL-04",
       "source_type": "real",
-      "test_category": "RCT - Oncology",
-      "llm_judge": {
-        "judge_model": "mock-judge",
-        "evaluation_date": "2026-10-28T15:14:25.918347",
-        "factual_consistency": 5,
-        "completeness": 5,
-        "readability": 5,
-        "evidence_support": 5,
-        "overall_score": 5.0,
-        "explanation": "Mocked deterministic evaluation report.",
-        "unsupported_claims": []
-      }
+      "test_category": "RCT - Oncology"
     },
     {
       "paper_id": "30096290",
@@ -214,18 +170,7 @@
       },
       "case_id": "REAL-05",
       "source_type": "real",
-      "test_category": "RCT - Primary Prevention",
-      "llm_judge": {
-        "judge_model": "mock-judge",
-        "evaluation_date": "2026-10-28T15:14:25.918989",
-        "factual_consistency": 5,
-        "completeness": 5,
-        "readability": 5,
-        "evidence_support": 5,
-        "overall_score": 5.0,
-        "explanation": "Mocked deterministic evaluation report.",
-        "unsupported_claims": []
-      }
+      "test_category": "RCT - Primary Prevention"
     },
     {
       "paper_id": "32678832",
@@ -253,18 +198,7 @@
       },
       "case_id": "REAL-06",
       "source_type": "real",
-      "test_category": "RCT - Infectious Disease",
-      "llm_judge": {
-        "judge_model": "mock-judge",
-        "evaluation_date": "2026-10-28T15:14:25.919613",
-        "factual_consistency": 5,
-        "completeness": 5,
-        "readability": 5,
-        "evidence_support": 5,
-        "overall_score": 5.0,
-        "explanation": "Mocked deterministic evaluation report.",
-        "unsupported_claims": []
-      }
+      "test_category": "RCT - Infectious Disease"
     },
     {
       "paper_id": "34748385",
@@ -292,18 +226,7 @@
       },
       "case_id": "REAL-07",
       "source_type": "real",
-      "test_category": "RCT - Antiviral Therapy",
-      "llm_judge": {
-        "judge_model": "mock-judge",
-        "evaluation_date": "2026-10-28T15:14:25.920360",
-        "factual_consistency": 5,
-        "completeness": 5,
-        "readability": 5,
-        "evidence_support": 5,
-        "overall_score": 5.0,
-        "explanation": "Mocked deterministic evaluation report.",
-        "unsupported_claims": []
-      }
+      "test_category": "RCT - Antiviral Therapy"
     },
     {
       "paper_id": "29020584",
@@ -331,18 +254,7 @@
       },
       "case_id": "REAL-08",
       "source_type": "real",
-      "test_category": "Meta-Analysis - Endocrinology",
-      "llm_judge": {
-        "judge_model": "mock-judge",
-        "evaluation_date": "2026-10-28T15:14:25.920897",
-        "factual_consistency": 5,
-        "completeness": 5,
-        "readability": 5,
-        "evidence_support": 5,
-        "overall_score": 5.0,
-        "explanation": "Mocked deterministic evaluation report.",
-        "unsupported_claims": []
-      }
+      "test_category": "Meta-Analysis - Endocrinology"
     },
     {
       "paper_id": "32706954",
@@ -370,18 +282,7 @@
       },
       "case_id": "REAL-09",
       "source_type": "real",
-      "test_category": "Diagnostic AI - Radiology",
-      "llm_judge": {
-        "judge_model": "mock-judge",
-        "evaluation_date": "2026-10-28T15:14:25.921455",
-        "factual_consistency": 5,
-        "completeness": 5,
-        "readability": 5,
-        "evidence_support": 5,
-        "overall_score": 5.0,
-        "explanation": "Mocked deterministic evaluation report.",
-        "unsupported_claims": []
-      }
+      "test_category": "Diagnostic AI - Radiology"
     },
     {
       "paper_id": "34185703",
@@ -409,18 +310,7 @@
       },
       "case_id": "REAL-10",
       "source_type": "real",
-      "test_category": "Observational - Nephrology",
-      "llm_judge": {
-        "judge_model": "mock-judge",
-        "evaluation_date": "2026-10-28T15:14:25.922088",
-        "factual_consistency": 5,
-        "completeness": 5,
-        "readability": 5,
-        "evidence_support": 5,
-        "overall_score": 5.0,
-        "explanation": "Mocked deterministic evaluation report.",
-        "unsupported_claims": []
-      }
+      "test_category": "Observational - Nephrology"
     },
     {
       "paper_id": "33027668",
@@ -448,18 +338,7 @@
       },
       "case_id": "REAL-11",
       "source_type": "real",
-      "test_category": "RCT - Critical Care",
-      "llm_judge": {
-        "judge_model": "mock-judge",
-        "evaluation_date": "2026-10-28T15:14:25.922768",
-        "factual_consistency": 5,
-        "completeness": 5,
-        "readability": 5,
-        "evidence_support": 5,
-        "overall_score": 5.0,
-        "explanation": "Mocked deterministic evaluation report.",
-        "unsupported_claims": []
-      }
+      "test_category": "RCT - Critical Care"
     },
     {
       "paper_id": "32835977",
@@ -487,18 +366,7 @@
       },
       "case_id": "REAL-12",
       "source_type": "real",
-      "test_category": "RCT - Postexposure Prophylaxis",
-      "llm_judge": {
-        "judge_model": "mock-judge",
-        "evaluation_date": "2026-10-28T15:14:25.923546",
-        "factual_consistency": 5,
-        "completeness": 5,
-        "readability": 5,
-        "evidence_support": 5,
-        "overall_score": 5.0,
-        "explanation": "Mocked deterministic evaluation report.",
-        "unsupported_claims": []
-      }
+      "test_category": "RCT - Postexposure Prophylaxis"
     },
     {
       "paper_id": "SYNTHETIC",
@@ -526,18 +394,7 @@
       },
       "case_id": "SYNTH-01",
       "source_type": "synthetic",
-      "test_category": "Synthetic - Missing Results Edge Case",
-      "llm_judge": {
-        "judge_model": "mock-judge",
-        "evaluation_date": "2026-10-28T15:14:25.924059",
-        "factual_consistency": 5,
-        "completeness": 5,
-        "readability": 5,
-        "evidence_support": 5,
-        "overall_score": 5.0,
-        "explanation": "Mocked deterministic evaluation report.",
-        "unsupported_claims": []
-      }
+      "test_category": "Synthetic - Missing Results Edge Case"
     },
     {
       "paper_id": "SYNTHETIC",
@@ -565,18 +422,7 @@
       },
       "case_id": "SYNTH-02",
       "source_type": "synthetic",
-      "test_category": "Synthetic - Contradictory/Inconclusive Edge Case",
-      "llm_judge": {
-        "judge_model": "mock-judge",
-        "evaluation_date": "2026-10-28T15:14:25.924627",
-        "factual_consistency": 5,
-        "completeness": 5,
-        "readability": 5,
-        "evidence_support": 5,
-        "overall_score": 5.0,
-        "explanation": "Mocked deterministic evaluation report.",
-        "unsupported_claims": []
-      }
+      "test_category": "Synthetic - Contradictory/Inconclusive Edge Case"
     },
     {
       "paper_id": "SYNTHETIC",
@@ -604,18 +450,7 @@
       },
       "case_id": "SYNTH-03",
       "source_type": "synthetic",
-      "test_category": "Synthetic - Very Small Sample Size Edge Case",
-      "llm_judge": {
-        "judge_model": "mock-judge",
-        "evaluation_date": "2026-10-28T15:14:25.925197",
-        "factual_consistency": 5,
-        "completeness": 5,
-        "readability": 5,
-        "evidence_support": 5,
-        "overall_score": 5.0,
-        "explanation": "Mocked deterministic evaluation report.",
-        "unsupported_claims": []
-      }
+      "test_category": "Synthetic - Very Small Sample Size Edge Case"
     },
     {
       "paper_id": "SYNTHETIC",
@@ -643,18 +478,7 @@
       },
       "case_id": "SYNTH-04",
       "source_type": "synthetic",
-      "test_category": "Synthetic - Number-Heavy Edge Case",
-      "llm_judge": {
-        "judge_model": "mock-judge",
-        "evaluation_date": "2026-10-28T15:14:25.926070",
-        "factual_consistency": 5,
-        "completeness": 5,
-        "readability": 5,
-        "evidence_support": 5,
-        "overall_score": 5.0,
-        "explanation": "Mocked deterministic evaluation report.",
-        "unsupported_claims": []
-      }
+      "test_category": "Synthetic - Number-Heavy Edge Case"
     }
   ]
 }
